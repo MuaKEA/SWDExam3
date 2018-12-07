@@ -1,23 +1,21 @@
 package com.example.demo.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
-    private String service;
+    private String name;
     private double price;
-
+    
     public Service() {
     }
 
-    public Service(String service, double price) {
-        this.service = service;
+    public Service(String name, double price) {
+        this.name = name;
         this.price = price;
     }
 
@@ -29,12 +27,12 @@ public class Service {
         this.id = id;
     }
 
-    public String getService() {
-        return service;
+    public String getName() {
+        return name;
     }
 
-    public void setService(String service) {
-        this.service = service;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {

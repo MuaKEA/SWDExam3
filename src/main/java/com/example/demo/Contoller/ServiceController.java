@@ -21,7 +21,9 @@ public class ServiceController {
     }
 
     @PostMapping("/opretService")
-    public String showInvoice(@ModelAttribute Service service){
+    public String showInvoice(Service service){
+
+        System.out.println(service);
         serviceRepository.save(service);
         return "redirect:/menu";
     }
