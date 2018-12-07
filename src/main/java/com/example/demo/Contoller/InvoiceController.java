@@ -1,17 +1,15 @@
 package com.example.demo.Contoller;
 
-import com.example.demo.Model.Repository.ServiceRepository;
+import com.example.demo.Model.Repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ServiceController {
+public class InvoiceController {
     @Autowired
-    private ServiceRepository serviceRepository;
+    private InvoiceRepository invoiceRepository;
 
-    @GetMapping("/createService")
-    public String showInvoice(MO)
-
+    @GetMapping("/createInvoice")
 
 }
