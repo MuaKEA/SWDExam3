@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class InvoiceController {
+
     @Autowired
     private InvoiceRepository invoiceRepository;
 
-    @GetMapping("/createInvoice")
+    //@GetMapping("/createInvoice")
 
 }
