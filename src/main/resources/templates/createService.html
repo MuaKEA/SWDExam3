@@ -7,11 +7,13 @@
 
 </head>
 <body>
-
+<form method="post" action="/opretService">
 <h1>Opret service</h1>
 <label>Service</label>
 <input type="text" th:field="${service.service}">
 <label>Pris</label>
-<input type="text" th:field="${service.price}">
+<input type="number" th:field="${service.price}">
+<button type="submit">Submit</button>
+</form>
 </body>
 </html>
