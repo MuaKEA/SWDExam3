@@ -7,13 +7,18 @@
 
 </head>
 <body>
+
+
 <form method="post" action="/opretService">
 <h1>Opret service</h1>
 <label>Service</label>
 <input type="text" th:field="${service.name}">
 <label>Pris</label>
 <input type="text" th:field="${service.price}">
-<button type="submit">Submit</button>
+
+
+
+    <button type="submit">Submit</button>
 </form>
 </body>
 </html>

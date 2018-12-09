@@ -10,7 +10,7 @@ public class Service {
     private long id;
     private String name;
     private double price;
-    
+
     public Service() {
     }
 
