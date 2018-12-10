@@ -3,18 +3,16 @@ package com.example.demo.Contoller;
 import com.example.demo.Model.Repository.ServiceRepository;
 import com.example.demo.Model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ServiceController {
     @Autowired
     private ServiceRepository serviceRepository;
-    //id virker ikke ordenligt
+
     @GetMapping("/opretService")
     public String createService(Model model){
         model.addAttribute("service", new Service());
@@ -40,9 +38,9 @@ public class ServiceController {
     }
     //kan ikke finde id
     @PostMapping("/redigerService")
-    public String editService(@RequestParam(value = "id") Long id, @ModelAttribute Service service){
-        System.out.println(id);
-        serviceRepository.deleteById(id);
+    public String editService(@ModelAttribute("serviceDelete") Service service){
+        System.out.println(service.getId());
+        serviceRepository.deleteById(service.getId());
         serviceRepository.save(service);
         return "redirect:/visService";
     }

@@ -92,10 +92,15 @@ nav {
     color: #24a2b6;
 }
 
-/*.navbar-dark .navbar-nav > .active {
-    background-color: #134370 !important;
-    color: white;
-}*/
+.navbar-dark .navbar-nav > .active > a{
+    background-color: white;
+    color: #31679c !important;
+}
+
+.active-nav-item{
+    background-color: white !important;
+    color: #31679c !important;
+}
 
 .link:hover {
     /*background-color: #134370;*/
