@@ -26,8 +26,8 @@
             </li>
         </ul>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-                <a class="navbar-fix nav-link link" href="/opretService">Service</a>
+            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/visService' ? 'active':''}">
+                <a class="navbar-fix nav-link link" href="/visService">Service</a>
             </li>
         </ul>
         <ul class="navbar-nav btn-logout">
