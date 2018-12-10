@@ -26,8 +26,8 @@ public Long id;
 
     @GetMapping("/opretKunde")
     public String createCostumer(Model model){
-        model.addAttribute("createCustomer",new Customer());
-        return "createCustimer";
+        model.addAttribute("customer",new Customer());
+        return "createCustomer";
     }
 
     @PostMapping("/opretKunde")

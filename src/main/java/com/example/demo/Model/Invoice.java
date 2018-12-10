@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -12,14 +13,14 @@ public class Invoice {
     @OneToOne
     private Service service;
     @OneToOne
-    private Costumer costumer;
+    private Customer customer;
 
 
-    public Invoice(int unit,double totalPrice,Service service,Costumer costumer) {
+    public Invoice(int unit,double totalPrice,Service service,Customer customer) {
        this.unit=unit;
         this.totalPrice = totalPrice;
         this.service=service;
-        this.costumer=costumer;
+        this.customer=customer;
     }
 
     public Invoice(){};
@@ -56,14 +57,13 @@ public class Invoice {
         this.service = service;
     }
 
-    public Costumer getCostumer() {
-        return costumer;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCostumer(Costumer costumer) {
-        this.costumer = costumer;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
-
 
     @Override
     public String toString() {
@@ -72,7 +72,7 @@ public class Invoice {
                 ", unit=" + unit +
                 ", totalPrice=" + totalPrice +
                 ", service=" + service +
-                ", costumer=" + costumer +
+                ", costumer=" + customer +
                 '}';
     }
 }
