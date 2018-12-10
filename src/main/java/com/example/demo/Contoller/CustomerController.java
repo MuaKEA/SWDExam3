@@ -39,7 +39,7 @@ public Long id;
 
     @GetMapping("/redigerKunde")
     public String editCostomer(@RequestParam(value = "id") Long id, Model model){
-        model.addAttribute("editCostomer", customerRepository.findById(id));
+        model.addAttribute("editCustomer", customerRepository.findById(id));
 
         return "editCustomer";
     }
