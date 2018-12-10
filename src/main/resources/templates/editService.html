@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Opret</title>
+    <title>Rediger</title>
 
     <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
 
@@ -10,13 +10,13 @@
 
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
-<form method="post" action="/opretService">
+<form method="post" action="/redigerService">
     <!--Ydre boks-->
     <div class="jumbotron jumbotron-fluid">
         <!--Overskrift-->
         <div class="row">
             <div class="container div-center">
-                <h1 class="page-heading mb-3">Opret service</h1>
+                <h1 class="page-heading mb-3">Rediger service</h1>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
         </div>
         <!--Centreret knap-->
         <div class="container div-center">
-            <button class="btn btn-success" type="submit">Gem</button>
+            <button class="btn btn-success" type="submit">Rediger</button>
         </div>
     </div>
 </form>
