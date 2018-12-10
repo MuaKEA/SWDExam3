@@ -7,19 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Costumer {
-@GeneratedValue(strategy = GenerationType.AUTO)
-@Id
+public class Customer {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private Long id;
     private String name;
-   private String firmName;
+    private String firmName;
     private String address;
     private String city;
     private Integer postCode;
     private String email;
 
 
-    public Costumer(String firmName,String name, String address, String city, Integer postCode, String email) {
+    public Customer(String firmName,String name, String address, String city, Integer postCode, String email) {
         this.firmName=firmName;
         this.name = name;
         this.address = address;
@@ -28,9 +28,9 @@ public class Costumer {
         this.email = email;
     }
 
-   public Costumer(){
+    public Customer(){
 
-   }
+    }
 
     public Long getId() {
         return id;
