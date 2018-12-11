@@ -48,6 +48,13 @@ public class ServiceController {
     @GetMapping("/sletService")
     public String deleteService(@RequestParam(value = "id") Long id){
         serviceRepository.deleteById(id);
-        return "showService";
+        return "redirect:/visService";
     }
+   /* @GetMapping ("/sletService/{id}")
+        public String deleteService (){
+
+        return "redirect:/visService";
+
+    }*/
+
 }
