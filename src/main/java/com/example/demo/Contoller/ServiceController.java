@@ -39,7 +39,6 @@ public class ServiceController {
 
     @PostMapping("/redigerService")
     public String editService(@ModelAttribute("serviceDelete") Service service){
-        System.out.println(service.getId());
         serviceRepository.deleteById(service.getId());
         serviceRepository.save(service);
         return "redirect:/visService";

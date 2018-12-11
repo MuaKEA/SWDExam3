@@ -89,8 +89,11 @@ public class InvoiceController {
         return "editInvoice";
     }
 
+
+
     @PostMapping("/redigerFaktura")
-    public String editInvoice(@ModelAttribute Invoice invoice){
+    public String editInvoice(Invoice invoice){
+        invoiceRepository.deleteById(invoice.getId());
         invoiceRepository.save(invoice);
         return "redirect:/editInvoice";
     }

@@ -28,34 +28,27 @@
                 <h1 class="page-heading mb-3">Opret kunde</h1>
             </div>
         </div>
-
-        <!--Indre boks-->
-        <div class="row">
-            <!--Input felt 1-->
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="input-group mb-3 col-sm-6">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Kunde navn</span>
-                    </div>
-                    <input type="text" class="form-control" th:field="${customer.name}" placeholder="Kunde" required="true">
+    </div>
+        <div class="col-sm-3"></div>
+        <div class="input-group mb-3 col-sm-6">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Kunde Firmanavn</span>
+            </div>
+                    <input type="text" class="form-control" th:field="${customer.firmName}" placeholder="Kunde" required="true">
                 </div>
                 <div class="col-sm-3"></div>
             </div>
-            <!--Input felt 2-->
-            <div class="row">
-                <div class="col-sm-5"></div>
-                <div class="input-group mb-3 col-sm-2">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Kunde</span>
-                    </div>
-                    <input type="text" class="form-control" th:field="${customer.firmName}" placeholder="Firmanavn" required="true">
-                </div>
-                <div class="col-sm-5"></div>
+            <div class="col-sm-3"></div>
+    <div class="input-group mb-3 col-sm-6">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Kunde navn</span>
+        </div>
+            <input type="text" class="form-control" th:field="${customer.name}" placeholder="Navn" required="true">
+    </div>
+        <div class="col-sm-3"></div>
             </div>
         </div>
-
-        <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
         <div class="input-group mb-3 col-sm-6">
             <div class="input-group-prepend">
                 <span class="input-group-text">Kunde adresse</span>
@@ -64,9 +57,7 @@
         </div>
         <div class="col-sm-3"></div>
     </div>
-
-
-    <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
     <div class="input-group mb-3 col-sm-6">
         <div class="input-group-prepend">
             <span class="input-group-text">Kunde by</span>
