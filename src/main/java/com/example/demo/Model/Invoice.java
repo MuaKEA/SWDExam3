@@ -9,15 +9,18 @@ public class Invoice {
     @Id
     private long id;
     private int unit;
+    private int price;
     private double totalPrice;
+
     @OneToOne
     private Service service;
     @OneToOne
     private Customer customer;
 
 
-    public Invoice(int unit,double totalPrice,Service service,Customer customer) {
+    public Invoice(int unit,int price,double totalPrice,Service service,Customer customer) {
        this.unit=unit;
+       this.price=price;
         this.totalPrice = totalPrice;
         this.service=service;
         this.customer=customer;
@@ -63,6 +66,14 @@ public class Invoice {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Override

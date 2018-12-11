@@ -48,9 +48,10 @@ public class InvoiceController {
 
     @GetMapping("/opretFaktura")
     public String createInvoice(Model model){
-        model.addAttribute("invoice", new Invoice());
+        model.addAttribute("Invoice", new Invoice());
         model.addAttribute("Service",serviceRepository.findAll());
         model.addAttribute("Costumer",customerRepository.findAll());
+        model.addAttribute("newService",new Service());
 
         return "createInvoice";
     }

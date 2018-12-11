@@ -1,41 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"><head>
+    <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
+
 </head>
 <body>
+<!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 <form method="post" action="/opretFaktura">
-    <h1>Opret service</h1>
-    <label>Service</label>
-    <input type="text" th:field="${invoice.name}">
-    <label>Pris</label>
-    <input type="text" th:field="${invoice.price}">
-    <label>Pris</label>
-    <input type="text" th:field="${invoice.price}">
-    <label>Pris</label>
-    <input type="text" th:field="${invoice.price}">
+    <!--Ydre boks-->
+    <div class="jumbotron jumbotron-fluid">
+        <!--Overskrift-->
+        <div class="row">
+            <div class="container div-center">
+                <h1 class="page-heading mb-3">Opret service</h1>
+            </div>
+        </div>
+
+        <!--Indre boks-->
+        <div class="container input-bg input-padding mb-3">
+            <!--Input felt 1-->
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="input-group mb-3 col-sm-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Service</span>
+                    </div>
+                    <select >
+                        <option th:each="service:${Service}"}>
+                            <td th:text="${service.name}"></td>
+                            <td th:hidden="${service.getPrice()}" id="serviceprice"></td>
+                        </option>
+
+                    </select>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <!--Input felt 2-->
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="input-group mb-3 col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pris</span>
+                    </div>
+                    <input type="number" class="form-control" th:field="${Invoice.unit}" placeholder="enhed" id="enhed" required="true">
+                </div>
+                <div class="col-sm-5"></div>
+<script>
+                document.getElementById("calculate").addEventListener('click', calculateTotalDue);
+</script>
+
+                <label for="result">Total Due</label>
+                <input type="text" id="result">
+            </div>
+
+            <div class="button">
+                <input type="button" id="calculate" value="Calculate">
+            </div>
 
 
-    <form method="post" action="/opretFaktura">
-        <h1>Opret service</h1>
-        <label>Service</label>
-        <input type="text" th:field="${invoice.name}">
-        <label>Pris</label>
-        <input type="text" th:field="${invoice.price}">
-        <label>Pris</label>
-        <input type="text" th:field="${invoice.price}">
+        </div>
+        <!--Centreret knap-->
+        <div class="container div-center">
+            <button class="btn btn-success" type="submit">Gem</button>
+        </div>
+    </div>
+</form>
 
 
-        <form method="post" action="/opretFaktura">
-            <h1>Opret service</h1>
-            <label>Service</label>
-            <input type="text" th:field="${invoice.name}">
-            <label>Pris</label>
-            <input type="text" th:field="${invoice.price}">
-            <label>Pris</label>
-            <input type="text" th:field="${invoice.price}">
 
-    <button type="submit">Submit</button>
+<script>
+    function calculateTotalDue() {
+        var unit =document.getElementById("unit").value ;
+
+        var price = document.getElementById("serviceprice").value;
+
+console.log(unit);
+console.log(price);
+
+        var totalCharge = (unit *  price).toFixed(2);
+
+        document.getElementById("result").value = "kr;" + totalCharge;
+
+
+    }
+
+
+</script>
+
+
 </body>
+
+
+
 </html>
