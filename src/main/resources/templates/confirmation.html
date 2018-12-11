@@ -4,6 +4,8 @@
     <title>Opret</title>
 
     <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
 
 </head>
 <body>
@@ -13,31 +15,56 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="row">
         <div class="container div-center">
-            <h1 class="page-heading mb-3">Opret service</h1>
+            <h1 class="page-heading mb-3">Kvittering</h1>
         </div>
     </div>
-    <div class="container input-bg input-padding mb-3">
-
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="input-group mb-3 col-sm-6">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Service</span>
-                </div>
-                <label th:field="${service.name}"></label>
-            </div>
-            <div class="col-sm-3"></div>
+    <div class="container confirmation mb-4">
+        <div class="row confirmation-row-bg row-height">
+            <span class="input-heading font-weight-bold span-padding">Kunde</span>
         </div>
-
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="input-group mb-3 col-sm-2">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Pris</span>
-                </div>
-                <input type="number" class="form-control" th:field="${service.price}" placeholder="Pris" required="true">
+        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3 confirmation-col-bg">
+            <span class="row-heading align-middle">Navn</span>
+        </div>
+        </div>
+        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3 confirmation-col-bg">
+            <span class="row-heading align-middle">Firma</span>
             </div>
-            <div class="col-sm-5"></div>
+        </div>
+        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3 confirmation-col-bg">
+            <span class="row-heading align-middle">Vej</span>
+            </div>
+        </div>
+        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3 confirmation-col-bg">
+        <span class="row-heading align-middle">By</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 confirmation-col-bg row-height">
+        <span class="row-heading align-middle">Postnummer</span>
+            </div>
+        </div>
+        <div class="row confirmation-row-bg row-height">
+            <span class="input-heading font-weight-bold span-padding">Pris</span>
+        </div>
+        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3 confirmation-col-bg">
+            <span class="row-heading align-middle">Service</span>
+            </div>
+        </div>
+        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3 confirmation-col-bg">
+            <span class="row-heading align-middle">Pris</span>
+            </div>
+        </div>
+        <div class="row row-height">
+            <div class="col-sm-6 receipt-bg"></div>
+            <div class="col-sm-3 confirmation-row-bg">
+                <span class="input-heading font-weight-bold align-middle">Total</span>
+            </div>
         </div>
     </div>
     <!--Centreret knap-->

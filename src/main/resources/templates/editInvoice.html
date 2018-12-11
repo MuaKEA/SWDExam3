@@ -1,0 +1,62 @@
+<!--Teacher-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <title>Edit Invoice</title>
+
+    <!--/*/ <th:block th:include="fragments/navbarHead :: head"></th:block> /*/-->
+
+</head>
+<body>
+
+<!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
+
+<form class="genericForm" method="post" th:action="@{/redigerFaktura}">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container mb-3">
+            <div class="row">
+                <div class="container div-center">
+                    <h1 class="page-heading mb-3">Edit invoice</h1>
+                </div>
+            </div>
+            <div class="container input-bg input-padding">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="input-heading">Invoice</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="input-heading"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group mb-3 col-sm-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"></span>
+                        </div>
+                        <input class="form-control" type="text" th:field="${invoice.name}" required="true">
+                    </div>
+                </div>
+
+                <div class="input-group mb-3 col-sm6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Antal</span>
+                            </div>
+                                <input class="form-control" type="number" th:field="${invoice.unit}" required = "true">
+
+                    </div>
+                <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Totalpris</span>
+                <input class="form-control" type="number" th:field="${invoice.totalPrice}" required="true">
+            </div>
+                    </div>
+
+              <input type="submit" value="Indsend"/>
+
+        </div>
+    </div>
+</form>
+</body>
+</html>
