@@ -5,86 +5,90 @@
 </head>
 <body>
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
-<form method="post" action="/opretFaktura">
+<form method="post" action="/opretFaktura" id="myTable">
     <!--Ydre boks-->
     <div class="jumbotron jumbotron-fluid">
         <!--Overskrift-->
         <div class="row">
             <div class="container div-center">
-                <h1 class="page-heading mb-3">Opret service</h1>
+
+
+
+
+
+                    <h1 class="page-heading mb-3">Opret faktura</h1>
             </div>
         </div>
 
         <!--Indre boks-->
         <div class="container input-bg input-padding mb-3">
             <!--Input felt 1-->
+
+            <select name="customer" id="customer">
+                <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}">
+                    
+                </option>
+
+
             <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="input-group mb-3 col-sm-6">
+                <div class="input-group mb-3 col-sm-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Service</span>
                     </div>
-                    <select >
-                        <option th:each="service:${Service}"}>
-                            <td th:text="${service.name}"></td>
-                            <td th:hidden="${service.getPrice()}" id="serviceprice"></td>
+                    <select name="service" id="serviceprice">
+                        <option th:each="service:${Service}" th:value="${service.getPrice()}" th:text="${service.name}">
                         </option>
 
                     </select>
                 </div>
-                <div class="col-sm-3"></div>
-            </div>
             <!--Input felt 2-->
-            <div class="row">
-                <div class="col-sm-5"></div>
                 <div class="input-group mb-3 col-sm-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pris</span>
                     </div>
-                    <input type="number" class="form-control" th:field="${Invoice.unit}" placeholder="enhed" id="enhed" required="true">
+                    <input type="number" class="form-control" th:field="${Invoice.unit}" placeholder="enhed" id="unit" required="true">
                 </div>
-                <div class="col-sm-5"></div>
-<script>
-                document.getElementById("calculate").addEventListener('click', calculateTotalDue);
-</script>
+                <div class="col-sm-2"></div>
+                <button onclick="myFunction()" type="button">calculate</button>
+                <p id="demo"></p>
 
-                <label for="result">Total Due</label>
-                <input type="text" id="result">
+                <div class="input-group mb-3 col-sm-2">
+                    <div class="input-group-prepend">
+                        <p id="result" class="input-group-text">Service pris</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="button">
-                <input type="button" id="calculate" value="Calculate">
-            </div>
-
-
         </div>
+           <!-- <div class="button">
+
+            </div>-->
+
+
         <!--Centreret knap-->
         <div class="container div-center">
-            <button class="btn btn-success" type="submit">Gem</button>
+            <button class="btn btn-success" type="submit">gem</button>
+            <button id="add_btn">Add new row</button>
         </div>
     </div>
 </form>
 
 
 
-<script>
-    function calculateTotalDue() {
-        var unit =document.getElementById("unit").value ;
-
-        var price = document.getElementById("serviceprice").value;
-
-console.log(unit);
-console.log(price);
-
-        var totalCharge = (unit *  price).toFixed(2);
-
-        document.getElementById("result").value = "kr;" + totalCharge;
 
 
-    }
+        <script>
+        function myFunction() {
+            var unit =document.getElementById("unit").value ;
+
+            var price = document.getElementById("serviceprice").value;
 
 
-</script>
+           var result=unit*price;
+
+            document.getElementById("result").innerText = "kr;" + result;
+
+        }
+        </script>
 
 
 </body>

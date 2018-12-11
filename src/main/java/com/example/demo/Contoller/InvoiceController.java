@@ -50,8 +50,7 @@ public class InvoiceController {
     public String createInvoice(Model model){
         model.addAttribute("Invoice", new Invoice());
         model.addAttribute("Service",serviceRepository.findAll());
-        model.addAttribute("Costumer",customerRepository.findAll());
-        model.addAttribute("newService",new Service());
+        model.addAttribute("Customer",customerRepository.findAll());
 
         return "createInvoice";
     }
