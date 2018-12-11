@@ -7,8 +7,19 @@
     <!--/*/ <th:block th:include="fragments/navbarHead :: head"></th:block> /*/-->
 
 </head>
+
+
 <body>
 
+<!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
+
+<div class="jumbotron jumbotron-fluid">
+    <!--Overskrift-->
+    <div class="row">
+        <div class="container div-center">
+            <h1 class="page-heading mb-3">Sendte Faktura</h1>
+        </div>
+    </div>
 
         <div class="container input-bg input-padding">
             <table class="table table-striped table-list">
@@ -23,13 +34,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="invoices:${invoiceList}">
-                    <td th:text="${invoices.costumer.firmName}"></td>
-                    <td th:text="${invoices.costumer.name}"></td>
-                    <td th:text="${invoices.costumer.email}"></td>
+                    <td th:text="${invoices.customer.firmName}"></td>
+                    <td th:text="${invoices.customer.name}"></td>
+                    <td th:text="${invoices.customer.email}"></td>
                     <td th:text="${invoices.totalPrice}"></td>
 
                     <td>
-                        <a th:href="@{'/redigerFaktura?id='+${invoices.getId()}}" class="btn-sm btn-primary">Rediger</a>
+
                         <a th:href="@{'/redigerFaktura?id='+${invoices.getId()}}" class="btn-sm btn-primary">Rediger</a>
                         <a th:href="@{'/sletFaktura?id='+${invoices.getId()}}"
                            onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>
@@ -39,8 +50,12 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="container div-center">
+                <a class="btn btn-success" href="/opretFaktura">Opret</a>
+            </div>
         </div>
     </div>
+
 </div>
 
 

@@ -34,7 +34,7 @@ public class InvoiceController {
     }
 
 
-    @GetMapping("/vis_sendteFaktura")
+    @GetMapping("/visSendteFaktura")
     public String showInvoices(Model model) {
         for (Invoice v : invoiceRepository.findAll()) {
             System.out.println(v);
@@ -99,7 +99,7 @@ public class InvoiceController {
     @GetMapping("/sletFaktura")
     public String deleteInvoice(@RequestParam(value = "id") Long id){
         invoiceRepository.deleteById(id);
-        return "showInvoice";
+        return "showInvoices";
     }
 
 

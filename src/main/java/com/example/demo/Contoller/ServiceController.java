@@ -36,7 +36,7 @@ public class ServiceController {
         model.addAttribute("service", serviceRepository.findById(id));
         return "editService";
     }
-    //kan ikke finde id
+
     @PostMapping("/redigerService")
     public String editService(@ModelAttribute("serviceDelete") Service service){
         System.out.println(service.getId());
@@ -50,11 +50,4 @@ public class ServiceController {
         serviceRepository.deleteById(id);
         return "redirect:/visService";
     }
-   /* @GetMapping ("/sletService/{id}")
-        public String deleteService (){
-
-        return "redirect:/visService";
-
-    }*/
-
 }

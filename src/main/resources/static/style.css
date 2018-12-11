@@ -142,8 +142,16 @@ nav {
     font-size: 19px;
     font-family: "Helvetica Neue Condensed",sans-serif;
     font-weight: 500;
-    color: white;
+    color: #474f5b;
     text-transform: uppercase;
+    padding-left: 10px;
+
+}
+.row-heading {
+    font-size: 17px;
+    font-family: "Helvetica Neue Condensed",sans-serif;
+    font-weight: 500;
+    color: #474f5b;
 }
 
 .input-group-text {
@@ -170,4 +178,31 @@ table.table-list > thead > tr > th {
     font-weight: 500;
     color: #777777;
     text-transform: uppercase;
+
+
+}
+
+.confirmation{
+    background-color: white;
+    width: 680px;
+
+}
+.confirmation-row-bg{
+    background-color:#8ca1c1;
+}
+.confirmation-col-bg{
+    background-color:#bdcce3;
+}
+.border-bottom-purple{
+    border-bottom:1px solid #8ca1c1;
+}
+.receipt-bg{
+    background-color: #ededed;
+}
+
+.row-height{
+    height: 35px;
+}
+.span-padding{
+    padding-top: 4px;
 }
