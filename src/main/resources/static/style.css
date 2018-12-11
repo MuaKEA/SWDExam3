@@ -93,12 +93,12 @@ nav {
 }
 
 .navbar-dark .navbar-nav > .active > a{
-    background-color: white;
+    background-color: #ededed;
     color: #31679c !important;
 }
 
 .active-nav-item{
-    background-color: white !important;
+    background-color: #ededed !important;
     color: #31679c !important;
 }
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Opret</title>
+
+    <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
+
+</head>
+<body>
+
+<!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="row">
+        <div class="container div-center">
+            <h1 class="page-heading mb-3">Opret service</h1>
+        </div>
+    </div>
+    <div class="container input-bg input-padding mb-3">
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="input-group mb-3 col-sm-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Service</span>
+                </div>
+                <label th:field="${service.name}"></label>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="input-group mb-3 col-sm-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Pris</span>
+                </div>
+                <input type="number" class="form-control" th:field="${service.price}" placeholder="Pris" required="true">
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+    </div>
+    <!--Centreret knap-->
+    <div class="container div-center">
+        <button class="btn btn-success" type="submit">Godkend</button>
+    </div>
+</div>
+</body>
+</html>

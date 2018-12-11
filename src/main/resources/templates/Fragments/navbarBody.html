@@ -21,8 +21,8 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-                <a class="navbar-fix nav-link link" href="/">Faktura</a>
+            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/vis_sendteFaktura' ? 'active':''}">
+                <a class="navbar-fix nav-link link" href="/vis_sendteFaktura">Faktura</a>
             </li>
         </ul>
         <ul class="navbar-nav mr-auto">

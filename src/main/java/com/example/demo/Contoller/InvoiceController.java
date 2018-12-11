@@ -74,8 +74,15 @@ public class InvoiceController {
     @PostMapping("/opretFaktura")
     public String createInvoice(Invoice invoice){
         invoiceRepository.save(invoice);
-        return "redirect:/confirmation";
+        return "redirect:/kvittering";
     }
+
+    @GetMapping("/kvittering")
+    public String confirmation(@RequestParam(value = "id") Long id, Model model){
+        model.addAttribute("invoice", invoiceRepository.findById(id));
+        return "confirmation";
+    }
+
 
     @GetMapping("/redigerFaktura")
     public String editInvoice(@RequestParam(value = "id") Long id, Model model){
