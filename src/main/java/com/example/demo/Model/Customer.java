@@ -1,11 +1,9 @@
 package com.example.demo.Model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.Tables;
 
+import javax.persistence.*;
 @Entity
 public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,8 +13,9 @@ public class Customer {
     private String firmName;
     private String address;
     private String city;
-    private Integer postCode;
     private String email;
+    private Integer postCode;
+
 
 
     public Customer(String firmName,String name, String address, String city, Integer postCode, String email) {
@@ -89,5 +88,16 @@ public class Customer {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", firmName='" + firmName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", postCode=" + postCode +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

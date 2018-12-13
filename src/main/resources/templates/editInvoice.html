@@ -1,6 +1,6 @@
 <!--Teacher-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org/">
 <head lang="en">
     <title>Edit Invoice</title>
 
@@ -23,7 +23,6 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <p class="input-heading">Invoice</p>
                     </div>
                     <div class="col-sm-6">
                         <p class="input-heading"></p>
@@ -32,31 +31,62 @@
 
                 <div class="row">
                     <div class="input-group mb-3 col-sm-6">
+                        <p class="input-heading">Invoice</p>
+
                         <div class="input-group-prepend">
                             <span class="input-group-text"></span>
                         </div>
-                        <input class="form-control" type="text" th:field="${invoice.name}" required="true">
+                        <input class="form-control" type="number" th:field="${invoice.unit}" required="true">
                     </div>
                 </div>
 
-                <div class="input-group mb-3 col-sm6">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Antal</span>
-                            </div>
-                                <input class="form-control" type="number" th:field="${invoice.unit}" required = "true">
 
-                    </div>
                 <div class="input-group mb-3 col-sm6">
                     <div class="input-group-prepend">
                             <span class="input-group-text">Totalpris</span>
-                <input class="form-control" type="number" th:field="${invoice.totalPrice}" required="true">
+                        <input class="form-control" type="number" th:field="${invoice.totalPrice}" required="true">
+            </div>
+                </div>
+
+                <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Totalpris</span>
+                        <input class="form-control" type="number" hidden th:field="${invoice.price}" required="true">
+            </div>
+                </div>
+
+                    <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">betalt?</span>
+                <input class="form-control" type="text" th:field="${invoice.payed}" required="true">
+            </div>  <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">kunde navn</span>
+                <input class="form-control" type="text" th:field="${invoice.customer}" required="true">
+            </div>  <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">service navn:</span>
+                <input class="form-control" type="text" th:field="${invoice.service.name}" required="true">
+            </div>
+                    <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">kunde navn:</span>
+                <input class="form-control" type="text" th:field="${invoice.customer.name}" required="true">
             </div>
                     </div>
 
+                    <div class="input-group mb-3 col-sm6">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">regning nr:</span>
+
+                        <input class="form-control" type="text"  th:field="${invoice.invoiceId}" required="true">
+            </div>
+
+                    </div>
+
+
               <input type="submit" value="Indsend"/>
 
-        </div>
-    </div>
 </form>
 </body>
 </html>

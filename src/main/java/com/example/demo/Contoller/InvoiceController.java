@@ -36,10 +36,7 @@ public class InvoiceController {
 
     @GetMapping("/visSendteFaktura")
     public String showInvoices(Model model) {
-        for (Invoice v : invoiceRepository.findAll()) {
-            System.out.println(v);
-        }
-        System.out.println("iam here");
+
         model.addAttribute("invoiceList", invoiceRepository.findAll());
 
 
@@ -85,6 +82,8 @@ public class InvoiceController {
 
     @GetMapping("/redigerFaktura")
     public String editInvoice(@RequestParam(value = "id") Long id, Model model){
+            Id=id;
+        System.out.println(invoiceRepository.findById(id) + " GET:from invocie id" );
         model.addAttribute("invoice", invoiceRepository.findById(id));
         return "editInvoice";
     }
@@ -93,16 +92,43 @@ public class InvoiceController {
 
     @PostMapping("/redigerFaktura")
     public String editInvoice(Invoice invoice){
-        invoiceRepository.deleteById(invoice.getId());
-        invoiceRepository.save(invoice);
-        return "redirect:/editInvoice";
+        System.out.println(invoice+" Invoice invoice");
+        Invoice invoice1 = new Invoice();
+        invoice1.setInvoiceId(invoice.getInvoiceId());
+        invoice1.setPayed(invoice.getPayed());
+        invoice1.setUnit(invoice.getUnit());
+        invoice1.setPrice(invoice.getPrice());
+        invoice1.setTotalPrice(invoice.getTotalPrice());
+        invoice1.setService(serviceRepository.findByName(invoice.getService().getName()));
+        invoice1.setCustomer(customerRepository.findByName(invoice.getCustomer().getName()));
+        invoiceRepository.deleteById(Id);
+
+        invoiceRepository.save(invoice1);
+        System.out.println(invoice1+ "invoice1");
+        return "redirect:/visSendteFaktura";
     }
 
     @GetMapping("/sletFaktura")
     public String deleteInvoice(@RequestParam(value = "id") Long id){
         invoiceRepository.deleteById(id);
-        return "showInvoices";
+        return "redirect:/visSendteFaktura";
+    }
+    @GetMapping("/all")
+    public String showAll(Model model) {
+        model.addAttribute("invoices", invoiceRepository.findAll());
+        return "books/allBooks";
     }
 
+    @GetMapping("/markereregning")
+    public String markereregning(@RequestParam(value = "id") Long id){
+
+       Invoice invoice=invoiceRepository.findByInvoiceId(id);
+        System.out.println(invoiceRepository.findById(id));
+       invoice.setPayed(true);
+        invoiceRepository.save(invoice);
+        System.out.println(invoiceRepository.findById(id));
+
+        return "redirect:/visSendteFaktura";
+    }
 
 }

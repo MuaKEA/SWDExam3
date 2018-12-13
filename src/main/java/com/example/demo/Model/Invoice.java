@@ -8,9 +8,11 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
+    private Long invoiceId;
     private int unit;
     private int price;
     private double totalPrice;
+    private boolean payed;
 
     @OneToOne
     private Service service;
@@ -18,12 +20,14 @@ public class Invoice {
     private Customer customer;
 
 
-    public Invoice(int unit,int price,double totalPrice,Service service,Customer customer) {
+    public Invoice(int unit,int price,double totalPrice,Boolean payed,Long invoiceId,Service service,Customer customer) {
        this.unit=unit;
        this.price=price;
+       this.payed=payed;
         this.totalPrice = totalPrice;
         this.service=service;
         this.customer=customer;
+        this.invoiceId=invoiceId;
     }
 
     public Invoice(){};
@@ -76,14 +80,35 @@ public class Invoice {
         this.price = price;
     }
 
+
+    public Long getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(Long invoiceId) {
+        this.invoiceId = invoiceId;
+    }
+
+    public boolean getPayed() {
+        return payed;
+    }
+
+    public void setPayed(boolean payed) {
+        this.payed = payed;
+    }
+
+
     @Override
     public String toString() {
         return "Invoice{" +
                 "id=" + id +
+                ", invoiceId=" + invoiceId +
                 ", unit=" + unit +
+                ", price=" + price +
                 ", totalPrice=" + totalPrice +
+                ", payed=" + payed +
                 ", service=" + service +
-                ", costumer=" + customer +
+                ", customer=" + customer +
                 '}';
     }
 }
