@@ -79,13 +79,15 @@ public class InvoiceController {
     }
 */
 
-    @PostMapping("/opretFaktura")
-    public String createInvoice(InvoiceWrapper invoiceWrapper){
+    @PostMapping("/save")
+    public String createInvoice(InvoiceWrapper invoiceWrapper,Model model){
         ArrayList<Invoice> invoiceArrayList=invoiceWrapper.getInvoiceArrayList();
-
+        System.out.println("iam here");
         for (int i = 0; i <invoiceArrayList.size() ; i++) {
-            System.out.println(invoiceArrayList.get(i));
+              invoiceRepository.save(invoiceArrayList.get(i));
         }
+
+
         return "redirect:/opretFaktura";
     }
 

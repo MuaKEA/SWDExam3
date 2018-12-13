@@ -8,20 +8,13 @@
 <body>
 
 
-    <select name="customer" id="customer">
-        <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}">
-        </option>
-    </select>
-    <select name="service" id="serviceprice">
-        <option th:each="service  :${Service}" th:value="${service.getPrice()}" th:text="${service.name}">
-        </option>
+
 
     </select>
 
-    <form action="#" th:action="@{/opretFaktura}" th:object="${Invoices}"
+    <form action="#" th:action="@{/save}" th:object="${Invoices}"
           method="post">
 
-    <tr th:each="invoice, itemStat : *{invoices.invoice}">
 
 
 
@@ -29,12 +22,38 @@
 
 
 
-        <td>
-            <input th:name="|books[${itemStat.index}].author|" th:value="${invoice.getunit()}"/>
-        </td>
-        <td>
-            <input th:name="|books[${itemStat.index}].author|" th:value="${invoice.payed}"/>
-        </td>
+
+
+            <tbody>
+
+            <select name="customer" id="customer">
+                <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}">
+                </option>
+            </select>
+
+
+            <tr th:each="invoice, itemStat : *{invoiceArrayList}">
+                <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" id="unit" /></td>
+                <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" id="result" /></td>
+
+                <select>
+                    <option th:each="service  :${Service}" th:text="${service.name}">
+                     <input  type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
+                        <input  type="hidden" th:field="${service.getId()}">
+                        <input  type="hidden" th:field="${service.getPrice()}" id="serviceprice">
+                    </option>
+                </select>
+
+
+
+            </tr>
+
+
+
+
+
+
+            </tbody>
 
 
 
@@ -52,7 +71,10 @@
 
 
     </div>
-</form>
+
+        <input type="submit" id="submitButton" th:value="Save">
+        <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+    </form>
 
 
 
