@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class InvoiceController {
     public Long Id;
+    public Long invoiceId=6L;
 
     @Autowired
     private InvoiceRepository invoiceRepository;
@@ -52,7 +54,7 @@ public class InvoiceController {
 
         for (int i = 0; i <10 ; i++) {
             Invoice invoice = new Invoice();
-
+          invoiceId=invoice.getInvoiceId();
             invoices.addinvoice(invoice);
         }
 
@@ -90,8 +92,20 @@ public class InvoiceController {
     }
 
     @GetMapping("/kvittering")
-    public String confirmation(@RequestParam(value = "id") Long id, Model model){
-        model.addAttribute("invoice", invoiceRepository.findById(id));
+    public String confirmation(Model model){
+        List<Invoice> invoices=invoiceRepository.findByInvoiceId(invoiceId);
+        Long customerid=null;
+        for (int i = 0; i <invoices.size(); i++) {
+            System.out.println(invoices.get(1).getService().getName());
+            customerid=invoices.get(i).getCustomer().getId();
+            System.out.println(customerid);
+            System.out.println(invoices.get(i));
+        }
+
+
+
+        model.addAttribute("Customer", customerRepository.findByid(customerid));
+        model.addAttribute("invoiceList", invoices);
         return "confirmation";
     }
 
@@ -138,11 +152,11 @@ public class InvoiceController {
     @GetMapping("/markereregning")
     public String markereregning(@RequestParam(value = "id") Long id){
 
-       Invoice invoice=invoiceRepository.findByInvoiceId(id);
-        System.out.println(invoiceRepository.findById(id));
-       invoice.setPayed(true);
-        invoiceRepository.save(invoice);
-        System.out.println(invoiceRepository.findById(id));
+//       Invoice invoice=invoiceRepository.findByInvoiceId(id);
+//        System.out.println(invoiceRepository.findById(id));
+//       invoice.setPayed(true);
+//        invoiceRepository.save(invoice);
+//        System.out.println(invoiceRepository.findById(id));
 
         return "redirect:/visSendteFaktura";
     }

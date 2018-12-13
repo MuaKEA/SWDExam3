@@ -206,3 +206,6 @@ table.table-list > thead > tr > th {
 .span-padding{
     padding-top: 4px;
 }
+.input-receipt-width{
+    width: 154px;
+}
