@@ -18,7 +18,7 @@ ArrayList<Invoice> invoiceArrayList= new ArrayList<>();
     }
 
    public void addinvoice(Invoice invoice){
-        invoiceArrayList.add(invoice);
+        this.invoiceArrayList.add(invoice);
 
    }
 

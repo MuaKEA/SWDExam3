@@ -21,7 +21,7 @@
     <form action="#" th:action="@{/opretFaktura}" th:object="${Invoices}"
           method="post">
 
-    <tr th:each="invoice, itemStat : *{Invoices.invoice}">
+    <tr th:each="invoice, itemStat : *{invoices.invoice}">
 
 
 
