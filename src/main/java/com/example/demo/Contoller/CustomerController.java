@@ -31,10 +31,9 @@ public Long id;
     }
 
     @PostMapping("/opretKunde")
-    public String createCostumer (Customer customer) {
+    public String createCostumer(Customer customer) {
         customerRepository.save(customer);
-
-        return "redirect:/createCustomer";
+        return "redirect:/opretKunde";
     }
 
     @GetMapping("/redigerKunde")
