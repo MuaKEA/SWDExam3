@@ -25,22 +25,19 @@
             <!--Input felt 1-->
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="input-group mb-3 col-sm-6">
+                <div class="input-group mb-3 col-sm-4">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Service</span>
                     </div>
-                    <input type="text" class="form-control" th:field="${service.name}" placeholder="Service" required="true">
+                    <input type="text" class="form-control" th:field="${service.name}" required="true">
                 </div>
-                <div class="col-sm-3"></div>
-            </div>
+
             <!--Input felt 2-->
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="input-group mb-3 col-sm-6">
+                 <div class="input-group mb-3 col-sm-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pris</span>
                     </div>
-                    <input type="number" class="form-control" th:field="${service.price}" placeholder="Pris" required="true">
+                    <input type="number" class="form-control" th:field="${service.price}" required="true">
                 </div>
                 <div class="col-sm-5"></div>
             </div>
