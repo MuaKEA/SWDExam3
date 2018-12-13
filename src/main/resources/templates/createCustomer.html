@@ -19,7 +19,7 @@
 
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
-<div method="post" action="/opretService">
+<form method="post" action="/opretService">
     <!--Ydre boks-->
     <div class="jumbotron jumbotron-fluid">
         <!--Overskrift-->
@@ -28,59 +28,56 @@
                 <h1 class="page-heading mb-3">Opret kunde</h1>
             </div>
         </div>
-    </div>
-        <div class="col-sm-3"></div>
-        <div class="input-group mb-3 col-sm-6">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Kunde Firmanavn</span>
-            </div>
-                    <input type="text" class="form-control" th:field="${customer.firmName}" placeholder="Kunde" required="true">
+        <div class="container input-bg input-padding mb-3">
+            <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="input-group mb-3 col-sm-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Firma</span>
                 </div>
+                <input type="text" class="form-control" th:field="${customer.firmName}" required="true">
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="input-group mb-3 col-sm-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Navn</span>
+                </div>
+                <input type="text" class="form-control" th:field="${customer.name}" required="true">
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-3"></div>
+    <div class="input-group mb-3 col-sm-6">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Vej</span>
+        </div>
+        <input type="text" class="form-control" th:field="${customer.address}" required="true">
+    </div>
+            </div>
+                <div class="row">
                 <div class="col-sm-3"></div>
-            </div>
-            <div class="col-sm-3"></div>
-    <div class="input-group mb-3 col-sm-6">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Kunde navn</span>
-        </div>
-            <input type="text" class="form-control" th:field="${customer.name}" placeholder="Navn" required="true">
+<div class="input-group mb-3 col-sm-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">By</span>
     </div>
-        <div class="col-sm-3"></div>
-            </div>
-        </div>
-            <div class="col-sm-3"></div>
-        <div class="input-group mb-3 col-sm-6">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Kunde adresse</span>
-            </div>
-            <input type="text" class="form-control" th:field="${customer.address}" placeholder="Adresse" required="true">
-        </div>
-        <div class="col-sm-3"></div>
-    </div>
-            <div class="col-sm-3"></div>
-    <div class="input-group mb-3 col-sm-6">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Kunde by</span>
-        </div>
-        <input type="text" class="form-control" th:field="${customer.city}" placeholder="By" required="true">
-    </div>
-    <div class="col-sm-3"></div>
-    </div>
+    <input type="text" class="form-control" th:field="${customer.city}" required="true">
+</div>
 
-    <div class="col-sm-3"></div>
-    <div class="input-group mb-3 col-sm-6">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Kunde postnr</span>
-        </div>
-        <input type="number" class="form-control" th:field="${customer.postCode}" placeholder="Postnr" required="true">
+<div class="input-group mb-3 col-sm-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Postnummer</span>
     </div>
-    <div class="col-sm-3"></div>
-    </div>
+    <input type="number" class="form-control" th:field="${customer.postCode}" required="true">
+</div>
+                    </div>
 
-    <!--Centreret knap-->
-    <div class="container div-center">
-        <button class="btn btn-success" type="submit">Gem</button>
-    </div>
+<!--Centreret knap-->
+<div class="container div-center">
+    <button class="btn btn-success" type="submit">Gem</button>
+</div>
+        </div>
     </div>
 </form>
 </body>
