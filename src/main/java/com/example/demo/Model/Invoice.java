@@ -14,9 +14,9 @@ public class Invoice {
     private double totalPrice;
     private boolean payed;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Service service;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Customer customer;
 
 

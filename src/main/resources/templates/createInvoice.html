@@ -1,112 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Services</title>
+
+    <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
+
 </head>
 <body>
 
+<!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
-
-
-    </select>
-
-    <form action="#" th:action="@{/save}" th:object="${Invoices}"
-          method="post">
-
-
-
-
-
-
-
-
-
-
-            <tbody>
-
-            <select name="customer" id="customer">
-                <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}">
-                </option>
-            </select>
-
-
-            <tr th:each="invoice, itemStat : *{invoiceArrayList}">
-                <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" id="unit" /></td>
-                <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" id="result" /></td>
-
-                <select>
-                    <option th:each="service  :${Service}" th:text="${service.name}">
-                     <input  type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
-                        <input  type="hidden" th:field="${service.getId()}">
-                        <input  type="hidden" th:field="${service.getPrice()}" id="serviceprice">
+<!--Ydre boks-->
+<div class="jumbotron jumbotron-fluid">
+    <!--Overskrift-->
+    <div class="row">
+        <div class="container div-center">
+            <h1 class="page-heading mb-3">Service</h1>
+        </div>
+    </div>
+    <form action="#" th:action="@{/save}" th:object="${Invoices}" method="post">
+        <div class="container input-bg input-padding">
+            <div class="container div-center">
+                <select name="customer" id="customer">
+                    <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}" th:value="${customer.getId()}">
                     </option>
                 </select>
+            </div>
+            <tr th:each="invoice, itemStat : *{invoiceArrayList}">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <select class="choose_service">
+                        <option th:each="service  :${Service}" th:text="${service.name}" th:value="${service.id}">
 
+                            <input class="serviceid" type="hidden" th:field="${service.getId()}">
+                            <input  type="text" th:field="${service.getPrice()}" class="serviceprice">
+                        </option>
+                    </select>
+                    <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" class="unit"/></td>
+                    <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result" /></td>
+                    <button class="calculate" type="button">calculate</button>
+                    <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/></td>
+                    <input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
 
-
+                </div>
             </tr>
 
-
-
-
-
-
-            </tbody>
-
-
-
-
-        <button onclick="myFunction()" type="button">calculate</button>
-
-
-
-
-
-
-    </tr>
-
-    <div class="container div-center">
-
-
-    </div>
-
-        <input type="submit" id="submitButton" th:value="Save">
-        <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+            <div class="container div-center">
+                <input class="btn btn-success" type="submit" id="submitButton" th:value="Save">
+                <input class="btn btn-danger" type="reset" id="resetButton" name="reset" th:value="Reset">
+            </div>
+        </div>
     </form>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    function myFunction() {
-        var unit =document.getElementById("unit").value ;
+    $(".calculate").click(function () {
+        var unit = $(this).parent().find(".unit").val();
+        var price = $(this).parent().find(".serviceprice").val();
+        var total = unit * price;
 
-        var price = document.getElementById("serviceprice").value;
+        $(this).parent().find(".result").val(total);
+    });
 
-        console.log(unit);
-        console.log(price);
+    $(".customerid").val($("#customer").val());
 
-        var result=unit*price;
-        console.log(result);
-        document.getElementById("result").innerText = "kr;" + result;
+    $("#customer").change(function () {
+        var id = $(this).val();
 
-    }
+        $(".customerid").val(id);
+    });
+
+    $(".serviceid").each(function () {
+        $(this).val($(this).parent().find(".choose_service").val());
+    });
+
+    $(".choose_service").change(function () {
+        var id = $(this).val();
+
+        $(this).parent().find(".serviceid").val(id);
+    });
 </script>
-
-
 </body>
-
-
-
 </html>

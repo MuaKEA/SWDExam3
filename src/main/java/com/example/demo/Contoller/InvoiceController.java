@@ -80,7 +80,7 @@ public class InvoiceController {
 */
 
     @PostMapping("/save")
-    public String createInvoice(InvoiceWrapper invoiceWrapper,Model model){
+    public String createInvoice(InvoiceWrapper invoiceWrapper){
         ArrayList<Invoice> invoiceArrayList=invoiceWrapper.getInvoiceArrayList();
         System.out.println("iam here");
         for (int i = 0; i <invoiceArrayList.size() ; i++) {
