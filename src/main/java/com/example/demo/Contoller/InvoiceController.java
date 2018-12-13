@@ -2,6 +2,7 @@ package com.example.demo.Contoller;
 
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Invoice;
+import com.example.demo.Model.InvoiceWrapper;
 import com.example.demo.Model.Repository.CustomerRepository;
 import com.example.demo.Model.Repository.InvoiceRepository;
 import com.example.demo.Model.Repository.ServiceRepository;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 
 @Controller
 public class InvoiceController {
@@ -45,7 +48,16 @@ public class InvoiceController {
 
     @GetMapping("/opretFaktura")
     public String createInvoice(Model model){
-        model.addAttribute("Invoice", new Invoice());
+        InvoiceWrapper invoices= new InvoiceWrapper();
+
+        for (int i = 0; i <10 ; i++) {
+            Invoice invoice = new Invoice();
+
+            invoices.addinvoice(invoice);
+        }
+
+
+       model.addAttribute("Invoices", invoices);
         model.addAttribute("Service",serviceRepository.findAll());
         model.addAttribute("Customer",customerRepository.findAll());
 
@@ -68,9 +80,13 @@ public class InvoiceController {
 */
 
     @PostMapping("/opretFaktura")
-    public String createInvoice(Invoice invoice){
-        invoiceRepository.save(invoice);
-        return "redirect:/kvittering";
+    public String createInvoice(InvoiceWrapper invoiceWrapper){
+        ArrayList<Invoice> invoiceArrayList=invoiceWrapper.getInvoiceArrayList();
+
+        for (int i = 0; i <invoiceArrayList.size() ; i++) {
+            System.out.println(invoiceArrayList.get(i));
+        }
+        return "redirect:/opretFaktura";
     }
 
     @GetMapping("/kvittering")
