@@ -26,7 +26,7 @@
                     </option>
                 </select>
             </div>
-           <!-- <tr th:each="invoice, itemStat : *{invoiceArrayList}">-->
+            <tr th:each="invoice, itemStat : *{invoiceArrayList}">
                 <table class="table table-striped table-list">
                     <thead>
                     <tr>
@@ -44,25 +44,24 @@
                         <td th:text="${service.name}" th:value="${service.id}">
                            <!-- <input type="text" th:text="${service.name}" th:value="${service.id}" readonly="readonly">-->
                             <input class="serviceid" type="hidden" th:field="${service.getId()}">
-                            <input  type="hidden" th:field="${service.getPrice()}" class="serviceprice">
+                            <input  type="hidden" th:field="${service.getPrice()}" >
                         </td>
-                        <td th:text="${service.price}"></td>
+                        <td th:text="${service.price}" class="serviceprice"></td>
                         <td>
-                            <input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" class="unit">
+                            <input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" class="unit" type="number" min="0">
                         </td>
                         <td>
                         <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result"/></td>
                         <td>
-                            <button class="calculate" type="button">calculate</button>
-                        <input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
-                        <input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
+                            <input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
+                            <input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
                         </td>
 
 
                     </tr>
                     </tbody>
                 </table>
-               <!-- <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-3"></div>
                     <select class="choose_service">
                         <option th:each="service  :${Service}" th:text="${service.name}" th:value="${service.id}">
@@ -90,12 +89,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    $(".calculate").click(function () {
-        var unit = $(this).parent().find(".unit").val();
-        var price = $(this).parent().find(".serviceprice").val();
-        var total = unit * price;
-
-        $(this).parent().find(".result").val(total);
+    $(".unit").on('input', function () {
+        var units = $(this).val();
+        var price = $(this).parent().parent().find(".serviceprice").text();
+        var result = units * price;
+        $(this).parent().parent().find(".result").val(result);
     });
 
     $(".customerid").val($("#customer").val());
