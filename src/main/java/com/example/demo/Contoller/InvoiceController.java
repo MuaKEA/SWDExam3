@@ -1,40 +1,38 @@
 package com.example.demo.Contoller;
 
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Invoice;
-import com.example.demo.Model.InvoiceWrapper;
+import com.example.demo.Model.*;
 import com.example.demo.Model.Repository.CustomerRepository;
+import com.example.demo.Model.Repository.InvoiceCollectionRepo;
 import com.example.demo.Model.Repository.InvoiceRepository;
 import com.example.demo.Model.Repository.ServiceRepository;
-import com.example.demo.Model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 @Controller
 public class InvoiceController {
     public Long Id;
-    public Long invoiceId=6L;
+    public Long invoiceId;
 
     @Autowired
     private InvoiceRepository invoiceRepository;
-   @Autowired
-   private ServiceRepository serviceRepository;
-   @Autowired
+    @Autowired
+    private ServiceRepository serviceRepository;
+    @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private InvoiceCollectionRepo invoiceCollectionRepo;
 
-   @GetMapping("/visFaktura")
+    @GetMapping("/visFaktura")
     public String showInvoice(@RequestParam(value = "id") Long id, Model model){
-            model.addAttribute("invoice",invoiceRepository.findById(id));
+        model.addAttribute("invoice",invoiceRepository.findById(id));
 
-            return "invoice";
+        return "invoice";
 
     }
 
@@ -42,7 +40,7 @@ public class InvoiceController {
     @GetMapping("/visSendteFaktura")
     public String showInvoices(Model model) {
 
-        model.addAttribute("invoiceList", invoiceRepository.findAll());
+        model.addAttribute("invoiceList", invoiceCollectionRepo.findAll());
 
 
         return "showInvoices";
@@ -54,67 +52,70 @@ public class InvoiceController {
 
         for (int i = 0; i <10 ; i++) {
             Invoice invoice = new Invoice();
-          invoiceId=invoice.getInvoiceId();
             invoices.addinvoice(invoice);
         }
 
 
-       model.addAttribute("Invoices", invoices);
+        model.addAttribute("Invoices", invoices);
         model.addAttribute("Service",serviceRepository.findAll());
         model.addAttribute("Customer",customerRepository.findAll());
 
         return "createInvoice";
     }
 
-/*
-    @GetMapping("/opretKunde")
-    public String createCostumer(Model model){
-       model.addAttribute("createCostumer",new Costumer());
-       return "createCostumer";
-    }
-
-    @PostMapping("/opretKunde")
-    public String createCostumer (Costumer costumer){
-       costumerRepository.save(costumer);
-
-       return "redirect:/createInvoice";
-    }
-*/
 
     @PostMapping("/save")
     public String createInvoice(InvoiceWrapper invoiceWrapper){
-        ArrayList<Invoice> invoiceArrayList=invoiceWrapper.getInvoiceArrayList();
-        System.out.println("iam here");
-        for (int i = 0; i <invoiceArrayList.size() ; i++) {
-              invoiceRepository.save(invoiceArrayList.get(i));
+        Long totalprice=0L;
+        Long customerId=0L;
+
+        long x = 1234567L;
+        long y = 2345678L;
+        Random r = new Random();
+        long number = x+((long)(r.nextDouble()*(y-x)));
+        invoiceId=number;
+        System.out.println("1");
+        for (int i = 0; i <invoiceWrapper.getInvoiceArrayList().size() ; i++) {
+            System.out.println(invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getName());
+            System.out.println(invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getFirmName());
+            System.out.println(invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getEmail());
+            customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
+
+
+
+            if(invoiceWrapper.getInvoiceArrayList().get(i).getPrice()==0 ||invoiceWrapper.getInvoiceArrayList().get(i).getUnit()==0){
+                invoiceWrapper.getInvoiceArrayList().remove(i);
+
+            }
+            totalprice+=invoiceWrapper.getInvoiceArrayList().get(i).getPrice();
+
+
         }
-
-
+        System.out.println("2");
+        invoiceRepository.saveAll(invoiceWrapper.getInvoiceArrayList());
+        Customer customer= customerRepository.findByid(customerId);
+        System.out.println(customer);
+        InvoiceCollection invoiceCollection = new InvoiceCollection(number,false,totalprice,customer.getFirmName(),customer.getEmail(),customer.getName(),invoiceWrapper.getInvoiceArrayList());
+        invoiceCollectionRepo.save(invoiceCollection);
         return "redirect:/opretFaktura";
     }
 
     @GetMapping("/kvittering")
     public String confirmation(Model model){
-        List<Invoice> invoices=invoiceRepository.findByInvoiceId(invoiceId);
-        Long customerid=null;
-        for (int i = 0; i <invoices.size(); i++) {
-            System.out.println(invoices.get(1).getService().getName());
-            customerid=invoices.get(i).getCustomer().getId();
-            System.out.println(customerid);
-            System.out.println(invoices.get(i));
-        }
+        InvoiceCollection invoices=invoiceCollectionRepo.findByInvoiceId(invoiceId);
 
 
 
-        model.addAttribute("Customer", customerRepository.findByid(customerid));
-        model.addAttribute("invoiceList", invoiceRepository.findByInvoiceId(invoiceId));
+
+        model.addAttribute("Customer", customerRepository.findByid(invoices.getId()));
+        model.addAttribute("invoiceList", invoices);
         return "confirmation";
     }
 
 
     @GetMapping("/redigerFaktura")
     public String editInvoice(@RequestParam(value = "id") Long id, Model model){
-            Id=id;
+        Id=id;
         System.out.println(invoiceRepository.findById(id) + " GET:from invocie id" );
         model.addAttribute("invoice", invoiceRepository.findById(id));
         return "editInvoice";
@@ -126,11 +127,8 @@ public class InvoiceController {
     public String editInvoice(Invoice invoice){
         System.out.println(invoice+" Invoice invoice");
         Invoice invoice1 = new Invoice();
-        invoice1.setInvoiceId(invoice.getInvoiceId());
-        invoice1.setPayed(invoice.getPayed());
         invoice1.setUnit(invoice.getUnit());
         invoice1.setPrice(invoice.getPrice());
-        invoice1.setTotalPrice(invoice.getTotalPrice());
         invoice1.setService(serviceRepository.findByName(invoice.getService().getName()));
         invoice1.setCustomer(customerRepository.findByName(invoice.getCustomer().getName()));
         invoiceRepository.deleteById(Id);
@@ -153,12 +151,10 @@ public class InvoiceController {
 
     @GetMapping("/markereregning")
     public String markereregning(@RequestParam(value = "id") Long id){
+        InvoiceCollection invoiceCollection =invoiceCollectionRepo.findByInvoiceId(id);
+        invoiceCollection.setPaid(true);
 
-//       Invoice invoice=invoiceRepository.findByInvoiceId(id);
-//        System.out.println(invoiceRepository.findById(id));
-//       invoice.setPayed(true);
-//        invoiceRepository.save(invoice);
-//        System.out.println(invoiceRepository.findById(id));
+
 
         return "redirect:/visSendteFaktura";
     }

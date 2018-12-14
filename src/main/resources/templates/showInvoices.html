@@ -35,26 +35,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="invoices:${invoiceList}">
-                    <td th:text="${invoices.customer.firmName}"></td>
-                    <td th:text="${invoices.customer.name}"></td>
-                    <td th:text="${invoices.customer.email}"></td>
-                    <td th:text="${invoices.totalPrice}"></td>
-                    <td th:text="${invoices.payed}"></td>
-                    <td th:text="${invoices.invoiceId}"></td>
-
-                    <td>
-
-                        <a th:href="@{'/redigerFaktura?id='+${invoices.getId()}}" class="btn-sm btn-primary">Rediger</a>
-                        <a th:href="@{'/sletFaktura?id='+${invoices.getId()}}"
-                           onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>
+                <tr th:each="invoice: *{invoiceList}">
+                    <td th:text="${invoice.firmName}"></td>
+                    <td th:text="${invoice.name}"></td>
+                    <td th:text="${invoice.email}"></td>
+                    <td th:text="${invoice.totalPris}"></td>
+                    <td th:text="${invoice.paid}"></td>
+                    <td th:text="${invoice.invoiceId}"></td>
 
 
-                        <a th:href="@{'/markereregning?id='+${invoices.getInvoiceId()}}"
-                           class="btn-sm btn-success" onclick="return confirm('regning betalt?')" >betalt</a>
+
+                    <!--<td>-->
+
+                        <!--<a th:href="@{'/redigerFaktura?id='+${invoices.getId()}}" class="btn-sm btn-primary">Rediger</a>-->
+                        <!--<a th:href="@{'/sletFaktura?id='+${invoices.getId()}}"-->
+                           <!--onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>-->
 
 
-                    </td>
+                        <!--<a th:href="@{'/markereregning?id='+${invoices.getInvoiceId()}}"-->
+                           <!--class="btn-sm btn-success" onclick="return confirm('regning betalt?')" >betalt</a>-->
+
+
+                    <!--</td>-->
 
 
 
