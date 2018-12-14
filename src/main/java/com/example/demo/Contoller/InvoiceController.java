@@ -18,7 +18,7 @@ import java.util.Random;
 @Controller
 public class InvoiceController {
     public Long Id;
-    public Long invoiceId=74L;
+    public Long invoiceId;
 
     @Autowired
     private InvoiceRepository invoiceRepository;
@@ -40,7 +40,6 @@ public class InvoiceController {
 
     @GetMapping("/visSendteFaktura")
     public String showInvoices(Model model) {
-
         model.addAttribute("invoiceList", invoiceCollectionRepo.findAll());
 
 
@@ -86,7 +85,6 @@ public class InvoiceController {
             customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
 
 
-
             if(invoiceWrapper.getInvoiceArrayList().get(i).getPrice()==0 ||invoiceWrapper.getInvoiceArrayList().get(i).getUnit()==0){
                 invoiceWrapper.getInvoiceArrayList().remove(i);
 
@@ -103,19 +101,15 @@ public class InvoiceController {
         InvoiceCollection invoiceCollection = new InvoiceCollection(number,false,totalprice,customer.getFirmName(),customer.getEmail(),customer.getName(),invoiceWrapper.getInvoiceArrayList());
         System.out.println("4");
         invoiceCollectionRepo.save(invoiceCollection);
-        return "redirect:/opretFaktura";
+        return "redirect:/kvittering";
     }
 
     @GetMapping("/kvittering")
     public String confirmation(Model model){
         InvoiceCollection invoices=invoiceCollectionRepo.findByInvoiceId(invoiceId);
+         Long customer=invoices.getInvoices().get(1).getCustomer().getId();
 
-        for (int i = 0; i <invoices.getInvoices().size() ; i++) {
-            System.out.println(invoices.getInvoices().get(i));
-        }
-
-
-        model.addAttribute("Customer", customerRepository.findByid(invoices.getId()));
+        model.addAttribute("customer", customerRepository.findByid(customer));
         model.addAttribute("invoiceList", invoices);
         return "confirmation";
     }
@@ -148,7 +142,7 @@ public class InvoiceController {
 
     @GetMapping("/sletFaktura")
     public String deleteInvoice(@RequestParam(value = "id") Long id){
-        invoiceRepository.deleteById(id);
+        invoiceCollectionRepo.deleteById(id);
         return "redirect:/visSendteFaktura";
     }
     @GetMapping("/all")
@@ -162,6 +156,7 @@ public class InvoiceController {
         InvoiceCollection invoiceCollection =invoiceCollectionRepo.findByInvoiceId(id);
         invoiceCollection.setPaid(true);
 
+        invoiceCollectionRepo.save(invoiceCollection);
 
 
         return "redirect:/visSendteFaktura";

@@ -8,13 +8,15 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
+    private Long serviceId;
     private String name;
     private double price;
 
     public Service() {
     }
 
-    public Service(String name, double price) {
+    public Service(Long serviceId,String name, double price) {
+        this.serviceId = serviceId;
         this.name = name;
         this.price = price;
     }
@@ -25,6 +27,14 @@ public class Service {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getName() {

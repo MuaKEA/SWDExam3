@@ -32,10 +32,8 @@
                     <th scope="col">betalt:</th>
                     <th scope="col">regningnr:</th>
 
-                </tr>
-                </thead>
                 <tbody>
-                <tr th:each="invoice: *{invoiceList}">
+                <tr th:each="invoice, itemStat : *{invoiceList}">
                     <td th:text="${invoice.firmName}"></td>
                     <td th:text="${invoice.name}"></td>
                     <td th:text="${invoice.email}"></td>
@@ -44,35 +42,24 @@
                     <td th:text="${invoice.invoiceId}"></td>
 
 
+                    <td>
 
-                    <!--<td>-->
-
-                        <!--<a th:href="@{'/redigerFaktura?id='+${invoices.getId()}}" class="btn-sm btn-primary">Rediger</a>-->
-                        <!--<a th:href="@{'/sletFaktura?id='+${invoices.getId()}}"-->
-                           <!--onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>-->
-
-
-                        <!--<a th:href="@{'/markereregning?id='+${invoices.getInvoiceId()}}"-->
-                           <!--class="btn-sm btn-success" onclick="return confirm('regning betalt?')" >betalt</a>-->
+                        <a th:href="@{'/redigerFaktura?id='+${invoice.getInvoiceId()}}" class="btn-sm btn-primary">Rediger</a>
+                        <a th:href="@{'/sletFaktura?id='+${invoice.getInvoiceId()}}"
+                           onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>
+                        <a th:href="@{'/markereregning?id='+${invoice.getInvoiceId()}}"
+                           class="btn-sm btn-success" onclick="return confirm('regning betalt?')" >betalt</a>
 
 
-                    <!--</td>-->
-
-
-
-
-
-
-
-
-
+                    </td>
 
                 </tr>
                 </tbody>
-            </table>
 
-        </div>
-    </div>
+
+
+
+            </table>
 
 </div>
 

@@ -98,4 +98,5 @@ public class InvoiceCollection {
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
     }
+
 }

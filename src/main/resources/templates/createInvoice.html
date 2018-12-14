@@ -53,7 +53,7 @@
                         <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result"/></td>
                         <td>
                             <input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
-                            <!--<input class="serviceid" type="hidden" th:text="*{invoiceArrayList[__${itemStat.index}__].service.id}"/>-->
+                            <!--<input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}"/>-->
                         </td>
                     </tr>
                     </tbody>
