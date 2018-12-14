@@ -90,7 +90,6 @@ public class InvoiceController {
 
             if(invoiceWrapper.getInvoiceArrayList().get(i).getPrice()==0 ||invoiceWrapper.getInvoiceArrayList().get(i).getUnit()==0){
                 invoiceWrapper.getInvoiceArrayList().remove(i);
-                j.remove(i);
             }
              invoiceWrapper.getInvoiceArrayList().get(i).setService(j.get(i));
             totalprice+=invoiceWrapper.getInvoiceArrayList().get(i).getPrice();
