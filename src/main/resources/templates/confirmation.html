@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>Opret</title>
 
@@ -7,6 +7,7 @@
 
 </head>
 <body>
+
 
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
@@ -24,38 +25,59 @@
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Navn</span>
         </div>
+            <div class="col-sm-3">
+                <input class="border-0 input-receipt-width row-heading" th:field="${Customer.name}" readonly="readonly">
+            </div>
         </div>
         <div class="row border-bottom-purple row-height">
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Firma</span>
+            </div>
+            <div class="col-sm-3">
+                <input class="border-0 input-receipt-width row-heading" th:field="${Customer.firmName}" readonly="readonly">
             </div>
         </div>
         <div class="row border-bottom-purple row-height">
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Vej</span>
             </div>
+            <div class="col-sm-3">
+                <input class="border-0 input-receipt-width row-heading" th:field="${Customer.address}" readonly="readonly">
+            </div>
         </div>
         <div class="row border-bottom-purple row-height">
             <div class="col-sm-3 confirmation-col-bg">
         <span class="row-heading align-middle">By</span>
+            </div>
+            <div class="col-sm-3">
+                <input class="border-0 input-receipt-width row-heading" th:field="${Customer.city}" readonly="readonly">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-3 confirmation-col-bg row-height">
         <span class="row-heading align-middle">Postnummer</span>
             </div>
+            <div class="col-sm-3">
+                <input class="border-0 input-receipt-width row-heading" th:field="${Customer.postCode}" readonly="readonly">
+            </div>
         </div>
         <div class="row confirmation-row-bg row-height">
             <span class="input-heading font-weight-bold span-padding">Pris</span>
         </div>
+        <tr th:each="invoices:${invoiceList}">
         <div class="row border-bottom-purple row-height">
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Service</span>
             </div>
-        </div>
-        <div class="row border-bottom-purple row-height">
+            <div class="col-sm-3">
+                <td class="border-0 input-receipt-width row-heading" th:text="${invoices.service.name}">
+            </div>
+
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Pris</span>
+            </div>
+            <div class="col-sm-3">
+            <td class="border-0 input-receipt-width float-right text-right row-heading" th:text="${invoices.getPrice()}">
             </div>
         </div>
         <div class="row row-height">
@@ -65,10 +87,12 @@
             </div>
         </div>
     </div>
+    </tr>
     <!--Centreret knap-->
     <div class="container div-center">
         <button class="btn btn-success" type="submit">Godkend</button>
     </div>
+
 </div>
 </body>
 </html>
