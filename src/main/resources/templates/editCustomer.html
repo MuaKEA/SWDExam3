@@ -1,16 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Opret</title>
+    <title>Rediger</title>
 
     <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
 
@@ -18,8 +9,7 @@
 <body>
 
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
-
-<form method="post" action="/opretKunde">
+<form method="post" action="/redigerKunde">
     <!--Ydre boks-->
     <div class="jumbotron jumbotron-fluid">
         <!--Overskrift-->
@@ -75,7 +65,8 @@
 
             <!--Centreret knap-->
             <div class="container div-center">
-                <button class="btn btn-success" type="submit">Gem</button>
+                <button class="btn btn-success" type="submit">Rediger</button>
+                <input type="hidden" th:field="${customer.id}" value="${customer.id}"/>
             </div>
         </div>
     </div>

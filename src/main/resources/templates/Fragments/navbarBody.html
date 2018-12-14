@@ -25,14 +25,14 @@
                 <a class="navbar-fix nav-link link" href="/visSendteFaktura">Faktura</a>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav">
             <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/visService' ? 'active':''}">
                 <a class="navbar-fix nav-link link" href="/visService">Service</a>
             </li>
         </ul>
-        <ul class="navbar-nav btn-logout">
-            <li class="nav-item">
-                <a class="navbar-fix nav-link font-weight-bold logout" href="/">Log ud</a>
+        <ul class="navbar-nav">
+            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/visKunde' ? 'active':''}">
+                <a class="navbar-fix nav-link link" href="/visKunde">Kunde</a>
             </li>
         </ul>
     </div>

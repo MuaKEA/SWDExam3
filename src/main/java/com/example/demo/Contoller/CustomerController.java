@@ -33,27 +33,34 @@ public Long id;
     @PostMapping("/opretKunde")
     public String createCostumer(Customer customer) {
         customerRepository.save(customer);
-        return "redirect:/opretKunde";
+        return "redirect:/visKunde";
     }
 
     @GetMapping("/redigerKunde")
-    public String editCostomer(@RequestParam(value = "id") Long id, Model model){
-        model.addAttribute("editCustomer", customerRepository.findById(id));
-
+    public String editCustomer(@RequestParam(value = "id") Long id, Model model){
+        model.addAttribute("customer", customerRepository.findById(id));
         return "editCustomer";
     }
 
     @PostMapping("/redigerKunde")
-    public String editCustomer(@ModelAttribute Customer customer){
+    public String editCustomer(@ModelAttribute("customerDelete") Customer customer) {
+        customerRepository.deleteById(customer.getId());
         customerRepository.save(customer);
-        return "redirect:/createCustomer";
+        return "redirect:/visKunde";
     }
 
     @GetMapping("/sletKunde")
     public String deleteCustomer(@RequestParam(value = "id") Long id){
         customerRepository.deleteById(id);
 
-        return "redirect:/createCustomer";
+        return "redirect:/visKunde";
+    }
+
+    @GetMapping("/visKunde")
+    public String showCustomer(Model model){
+        model.addAttribute("customerList", customerRepository.findAll());
+
+        return "showCustomer";
     }
 
 }
