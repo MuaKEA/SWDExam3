@@ -83,9 +83,6 @@ public class InvoiceController {
         invoiceId=number;
         System.out.println("1");
         for (int i = 0; i <invoiceWrapper.getInvoiceArrayList().size() ; i++) {
-            System.out.println(invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getName());
-            System.out.println(invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getFirmName());
-            System.out.println(invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getEmail());
             customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
 
 
@@ -102,7 +99,9 @@ public class InvoiceController {
         invoiceRepository.saveAll(invoiceWrapper.getInvoiceArrayList());
         Customer customer= customerRepository.findByid(customerId);
         System.out.println(customer);
+        System.out.println("3");
         InvoiceCollection invoiceCollection = new InvoiceCollection(number,false,totalprice,customer.getFirmName(),customer.getEmail(),customer.getName(),invoiceWrapper.getInvoiceArrayList());
+        System.out.println("4");
         invoiceCollectionRepo.save(invoiceCollection);
         return "redirect:/opretFaktura";
     }
