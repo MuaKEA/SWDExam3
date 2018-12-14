@@ -70,14 +70,14 @@
             <span class="row-heading align-middle">Service</span>
             </div>
             <div class="col-sm-3">
-                <input class="border-0 input-receipt-width row-heading" th:field="${invoices.getService().getName()}" readonly="readonly">
+                <td class="border-0 input-receipt-width row-heading" th:text="${invoices.service.name}">
             </div>
 
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Pris</span>
             </div>
             <div class="col-sm-3">
-            <input class="border-0 input-receipt-width float-right text-right row-heading" th:field="${invoices.getPrice()}" readonly="readonly">
+            <td class="border-0 input-receipt-width float-right text-right row-heading" th:text="${invoices.getPrice()}">
             </div>
         </div>
         <div class="row row-height">

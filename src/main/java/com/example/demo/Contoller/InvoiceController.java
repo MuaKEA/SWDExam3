@@ -107,7 +107,7 @@ public class InvoiceController {
 
 
         model.addAttribute("Customer", customerRepository.findByid(customerid));
-        model.addAttribute("invoiceList", invoices);
+        model.addAttribute("invoiceList", invoiceRepository.findByInvoiceId(invoiceId));
         return "confirmation";
     }
 
