@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Random;
 
 @Controller
 public class InvoiceController {
     public Long Id;
-    public Long invoiceId;
+    public Long invoiceId=74L;
 
     @Autowired
     private InvoiceRepository invoiceRepository;
@@ -49,15 +50,21 @@ public class InvoiceController {
     @GetMapping("/opretFaktura")
     public String createInvoice(Model model){
         InvoiceWrapper invoices= new InvoiceWrapper();
+        List <Service> j= serviceRepository.findAll();
 
-        for (int i = 0; i <10 ; i++) {
+        System.out.println(j.size());
+
+
+        for (int i = 0; i <j.size(); i++) {
+            Service service=j.get(i);
+
             Invoice invoice = new Invoice();
+            invoice.setService(service);
             invoices.addinvoice(invoice);
         }
 
 
         model.addAttribute("Invoices", invoices);
-        model.addAttribute("Service",serviceRepository.findAll());
         model.addAttribute("Customer",customerRepository.findAll());
 
         return "createInvoice";
@@ -104,7 +111,9 @@ public class InvoiceController {
     public String confirmation(Model model){
         InvoiceCollection invoices=invoiceCollectionRepo.findByInvoiceId(invoiceId);
 
-
+        for (int i = 0; i <invoices.getInvoices().size() ; i++) {
+            System.out.println(invoices.getInvoices().get(i));
+        }
 
 
         model.addAttribute("Customer", customerRepository.findByid(invoices.getId()));
