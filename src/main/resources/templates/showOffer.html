@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Services</title>
+
+    <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
+
+</head>
+
+<!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
+
+<!--Ydre boks-->
+<div class="jumbotron jumbotron-fluid">
+    <!--Overskrift-->
+    <div class="row">
+        <div class="container div-center">
+            <h1 class="page-heading mb-3">Tilbud</h1>
+        </div>
+    </div>
+
+    <div class="container input-bg input-padding">
+        <table class="table table-striped table-list">
+            <thead>
+            <tr>
+                <th scope="col">Tilbud</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offer:${offerList}">
+                <td th:text="${offer.text}"></td>
+                <td>
+                    <a th:href="@{'/redigerTilbud?id='+${offer.getId()}}" class="btn-sm btn-primary">Rediger</a>
+                    <a th:href="@{'/sletTilbud?id='+${offer.getId()}}"
+                       onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>
+
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <div class="container div-center">
+            <a class="btn btn-success" href="/opretTilbud">Opret</a>
+        </div>
+    </div>
+</div>
+<body>
+
+</body>
+</html>
