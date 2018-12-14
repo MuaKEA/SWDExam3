@@ -71,6 +71,8 @@
             </div>
             <div class="col-sm-3">
                 <td class="border-0 input-receipt-width row-heading" th:text="${invoices.service.name}">
+                <td class="border-2 input-receipt-width row-heading" th:text="${invoices.unit}">
+                <td class="border-3 input-receipt-width row-heading" th:text="${invoices.price}">
             </div>
 
             <!--<div class="col-sm-3 confirmation-col-bg">-->
@@ -88,6 +90,8 @@
         <div class="col-sm-6 receipt-bg"></div>
         <div class="col-sm-3 confirmation-row-bg">
             <span class="input-heading font-weight-bold align-middle">Total</span>
+            <td class="border-3 input-receipt-width row-heading">
+              <td th:text="${invoiceList.totalPris}"></td>
         </div>
     </div>
     </div>

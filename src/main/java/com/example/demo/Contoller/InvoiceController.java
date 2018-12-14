@@ -20,6 +20,7 @@ public class InvoiceController {
     public Long Id;
     public Long invoiceId;
 
+
     @Autowired
     private InvoiceRepository invoiceRepository;
     @Autowired
@@ -28,6 +29,8 @@ public class InvoiceController {
     private CustomerRepository customerRepository;
     @Autowired
     private InvoiceCollectionRepo invoiceCollectionRepo;
+    public List <Service> j;
+
 
     @GetMapping("/visFaktura")
     public String showInvoice(@RequestParam(value = "id") Long id, Model model){
@@ -49,14 +52,13 @@ public class InvoiceController {
     @GetMapping("/opretFaktura")
     public String createInvoice(Model model){
         InvoiceWrapper invoices= new InvoiceWrapper();
-        List <Service> j= serviceRepository.findAll();
+         j= serviceRepository.findAll();
 
         System.out.println(j.size());
 
 
         for (int i = 0; i <j.size(); i++) {
             Service service=j.get(i);
-
             Invoice invoice = new Invoice();
             invoice.setService(service);
             invoices.addinvoice(invoice);
@@ -72,6 +74,8 @@ public class InvoiceController {
 
     @PostMapping("/save")
     public String createInvoice(InvoiceWrapper invoiceWrapper){
+        System.out.println(j.get(1) +  " =iam here");
+
         Long totalprice=0L;
         Long customerId=0L;
 
@@ -84,11 +88,11 @@ public class InvoiceController {
         for (int i = 0; i <invoiceWrapper.getInvoiceArrayList().size() ; i++) {
             customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
 
-
             if(invoiceWrapper.getInvoiceArrayList().get(i).getPrice()==0 ||invoiceWrapper.getInvoiceArrayList().get(i).getUnit()==0){
                 invoiceWrapper.getInvoiceArrayList().remove(i);
-
+                j.remove(i);
             }
+             invoiceWrapper.getInvoiceArrayList().get(i).setService(j.get(i));
             totalprice+=invoiceWrapper.getInvoiceArrayList().get(i).getPrice();
 
 
