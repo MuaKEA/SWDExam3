@@ -76,19 +76,14 @@ public class InvoiceController {
     @PostMapping("/save")
     public String createInvoice(InvoiceWrapper invoiceWrapper){
         System.out.println(j.get(1) +  " =iam here");
-
         Long totalprice=0L;
-        Long totalpricewithtax=(totalprice /25) + totalprice ;
-
         Long customerId=0L;
-
         long x = 1234567L;
         long y = 2345678L;
         Random r = new Random();
         long number = x+((long)(r.nextDouble()*(y-x)));
         invoiceId=number;
 
-        System.out.println("1");
         for (int i = 0; i <invoiceWrapper.getInvoiceArrayList().size() ; i++) {
             customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
             invoiceWrapper.getInvoiceArrayList().get(i).setService(j.get(i));
@@ -101,14 +96,12 @@ public class InvoiceController {
 
         }
         DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
-
-        System.out.println("2");
+        Long totalpricewithtax=(totalprice/100L*25) + totalprice ;
         invoiceRepository.saveAll(invoiceWrapper.getInvoiceArrayList());
         Customer customer= customerRepository.findByid(customerId);
-
+        System.out.println(totalprice);
+        System.out.println(totalpricewithtax);
         InvoiceCollection invoiceCollection = new InvoiceCollection(number,false,totalpricewithtax,customer.getFirmName(),customer.getEmail(),customer.getName(),dateFormat.format(invoiceWrapper.getInvoiceCalendar())+"",dateFormat.format(invoiceWrapper.getDueCalendar()) +"",invoiceWrapper.getInvoiceArrayList());
-        System.out.println(invoiceWrapper.getDueCalendar());
-        System.out.println("4");
         invoiceCollectionRepo.save(invoiceCollection);
         return "redirect:/kvittering";
     }
