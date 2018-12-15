@@ -1,10 +1,18 @@
 package com.example.demo.Model;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class InvoiceWrapper {
-
-ArrayList<Invoice> invoiceArrayList= new ArrayList<>();
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date invoiceCalendar;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dueCalendar;
+    ArrayList<Invoice> invoiceArrayList= new ArrayList<>();
 
 
 
@@ -22,4 +30,19 @@ ArrayList<Invoice> invoiceArrayList= new ArrayList<>();
 
    }
 
+    public Date getInvoiceCalendar() {
+        return invoiceCalendar;
+    }
+
+    public void setInvoiceCalendar(Date invoiceCalendar) {
+        this.invoiceCalendar = invoiceCalendar;
+    }
+
+    public Date getDueCalendar() {
+        return dueCalendar;
+    }
+
+    public void setDueCalendar(Date dueCalendar) {
+        this.dueCalendar = dueCalendar;
+    }
 }

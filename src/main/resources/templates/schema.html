@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--/*/ <th:block th:include="fragments/navbarHead :: head"></th:block> /*/-->
+
+</head>
+<body>
+<form class="form-signin" method="post" action="/kalender">
+    <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
+
+    <label>mandag</label>
+    <input class="form-control" type="text" th:field="${schema.monDay}" required="true">
+ <label>tirdag</label>
+    <input class="form-control" type="text" th:field="${schema.tuesDay}" required="true">
+ <label>onsdag</label>
+    <input class="form-control" type="text" th:field="${schema.wednesday}" required="true">
+ <label>torsdag</label>
+    <input class="form-control" type="text" th:field="${schema.thursDay}" required="true">
+ <label>fredag</label>
+    <input class="form-control" type="text" th:field="${schema.friDay}" required="true">
+ <label>lørdag</label>
+    <input class="form-control" type="text" th:field="${schema.saturDay}" required="true">
+ <label>søndag</label>
+    <input class="form-control" type="text" th:field="${schema.sunDay}" required="true">
+
+    <button class="btn btn-success" type="submit">Gem</button>
+
+
+</form>
+
+
+
+
+
+</body>
+</html>

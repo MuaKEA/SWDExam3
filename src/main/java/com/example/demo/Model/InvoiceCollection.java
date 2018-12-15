@@ -1,9 +1,9 @@
 package com.example.demo.Model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class InvoiceCollection {
@@ -16,6 +16,8 @@ public class InvoiceCollection {
     private String firmName;
     private String email;
     private String name;
+    private String invoiceDate;
+    private String dueDate;
     @OneToMany
     private List<Invoice> invoices;
 
@@ -25,13 +27,15 @@ public class InvoiceCollection {
 
     }
 
-    public InvoiceCollection(Long invoiceId, Boolean paid, Long totalPris, String firmName, String email, String name, List<Invoice> invoices) {
+    public InvoiceCollection(Long invoiceId, Boolean paid, Long totalPris, String firmName, String email, String name, String invoiceDate, String dueDate, List<Invoice> invoices) {
         this.invoiceId = invoiceId;
         this.paid = paid;
         this.totalPris = totalPris;
         this.firmName = firmName;
         this.email = email;
         this.name = name;
+        this.invoiceDate = invoiceDate;
+        this.dueDate = dueDate;
         this.invoices = invoices;
     }
 
@@ -89,6 +93,22 @@ public class InvoiceCollection {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
     public List<Invoice> getInvoices() {

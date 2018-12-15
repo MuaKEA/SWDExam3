@@ -17,8 +17,20 @@
         <div class="container div-center">
             <h1 class="page-heading mb-3">Service</h1>
         </div>
+
+
     </div>
     <form action="#" th:action="@{/save}" th:object="${Invoices}" method="post">
+        <table class="table table-striped table-list">
+
+            <input type="date"  class="form-control" id="invoiceDate"
+                   th:value="${#calendars.format(Invoices.invoiceCalendar,'yyyy-MM-dd')}" th:name="invoiceCalendar" />
+            <input type="date" value="2016-10-13" class="form-control" id="duedate"
+                   th:value="${#calendars.format(Invoices.dueCalendar,'yyyy-MM-dd')}" th:name="dueCalendar" />
+
+        </table>
+
+
         <input type="hidden" th:each="service : ${Service}">
         <div class="container input-bg input-padding">
             <div class="container div-center">
@@ -26,6 +38,9 @@
                     <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}" th:value="${customer.getId()}">
                     </option>
                 </select>
+
+            </div>
+
             </div>
             <table class="table table-striped table-list">
                 <thead>
@@ -53,7 +68,7 @@
                         <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result"/></td>
                         <td>
                             <input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
-                            <!--<input class="serviceid" type="hidden" th:text="*{invoiceArrayList[__${itemStat.index}__].service.id}"/>-->
+                            <!--<input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}"/>-->
                         </td>
                     </tr>
                     </tbody>
@@ -79,9 +94,9 @@
                 <input class="btn btn-success" type="submit" id="submitButton" th:value="Save">
                 <input class="btn btn-danger" type="reset" id="resetButton" name="reset" th:value="Reset">
             </div>
-        </div>
     </form>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>

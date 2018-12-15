@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @Controller
 public class ServiceController {
     @Autowired
@@ -21,6 +23,11 @@ public class ServiceController {
 
     @PostMapping("/opretService")
     public String createService(Service service){
+        long x = 1000;
+        long y = 10000;
+        Random r = new Random();
+        long number = x+((long)(r.nextDouble()*(y-x)));
+        service.setServiceId(number);
         serviceRepository.save(service);
         return "redirect:/visService";
     }
