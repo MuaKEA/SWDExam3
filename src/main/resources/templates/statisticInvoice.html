@@ -5,30 +5,36 @@
 </head>
 <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
 
+
 <body>
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
-<div class="container input-bg input-padding">
-    <table class="table table-striped table-list">
-        <thead>
-        <tr>
-            <th scope="col">måned</th>
-            <th scope="col">kvatal</th>
-            <th scope="col">åri</th>
+<div class="jumbotron jumbotron-fluid">
+    <!--Overskrift-->
+    <div class="row">
+        <div class="container div-center">
+            <h1 class="page-heading mb-3">Statistik</h1>
+        </div>
+    </div>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="statis:${statistics}">
-            <td th:text="${statis}"></td>
+    <div class="container input-bg input-padding">
+        <table class="table table-striped table-list">
+            <thead>
+            <tr>
+                <th scope="col">Måned</th>
+                <th scope="col">Kvatal</th>
+                <th scope="col">Årti</th>
 
-
-
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="statistic:${statistics}">
+                <td th:text="${statistic}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 
 </body>
 </html>

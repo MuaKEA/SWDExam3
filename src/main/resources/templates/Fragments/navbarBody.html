@@ -35,6 +35,21 @@
                 <a class="navbar-fix nav-link link" href="/visKunde">Kunde</a>
             </li>
         </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/visTilbud' ? 'active':''}">
+                <a class="navbar-fix nav-link link" href="/visTilbud">Tilbud</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/statistik' ? 'active':''}">
+                <a class="navbar-fix nav-link link" href="/statistik">Statistik</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item-color" th:classappend="${#httpServletRequest.getRequestURI() == '/kalender' ? 'active':''}">
+                <a class="navbar-fix nav-link link" href="/kalender">Kalender</a>
+            </li>
+        </ul>
     </div>
 </nav>
 

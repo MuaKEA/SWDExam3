@@ -11,29 +11,58 @@
 <form class="form-signin" method="post" action="/kalender">
     <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
-    <label>mandag</label>
-    <input class="form-control" type="text" th:field="${schema.monDay}" required="true">
- <label>tirdag</label>
-    <input class="form-control" type="text" th:field="${schema.tuesDay}" required="true">
- <label>onsdag</label>
-    <input class="form-control" type="text" th:field="${schema.wednesday}" required="true">
- <label>torsdag</label>
-    <input class="form-control" type="text" th:field="${schema.thursDay}" required="true">
- <label>fredag</label>
-    <input class="form-control" type="text" th:field="${schema.friDay}" required="true">
- <label>lørdag</label>
-    <input class="form-control" type="text" th:field="${schema.saturDay}" required="true">
- <label>søndag</label>
-    <input class="form-control" type="text" th:field="${schema.sunDay}" required="true">
+    <div class="jumbotron jumbotron-fluid">
+        <!--Overskrift-->
+        <div class="row">
+            <div class="container div-center">
+                <h1 class="page-heading mb-3">Statistik</h1>
+            </div>
+        </div>
 
-    <button class="btn btn-success" type="submit">Gem</button>
-
-
+        <div class="container input-bg input-padding">
+            <table class="table table-striped table-list">
+                <thead>
+                <tr>
+                    <th scope="col">Mandag</th>
+                    <th scope="col">Tirsdag</th>
+                    <th scope="col">Onsdag</th>
+                    <th scope="col">Torsdag</th>
+                    <th scope="col">Fredag</th>
+                    <th scope="col">Lørdag</th>
+                    <th scope="col">Søndag</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.monDay}" required="true"></textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.tuesDay}" required="true"></textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.wednesday}" required="true"></textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.thursDay}" required="true"></textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.friDay}" required="true"></textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.saturDay}" required="true"></textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" type="text" th:field="${schema.sunDay}" required="true"></textarea>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="container div-center">
+                <button class="btn btn-success" type="submit">Gem</button>
+            </div>
+        </div>
+    </div>
 </form>
-
-
-
-
-
 </body>
 </html>
