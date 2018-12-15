@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Random;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class InvoiceController {
@@ -77,6 +78,8 @@ public class InvoiceController {
         System.out.println(j.get(1) +  " =iam here");
 
         Long totalprice=0L;
+        Long totalpricewithtax=(totalprice /25) + totalprice ;
+
         Long customerId=0L;
 
         long x = 1234567L;
@@ -84,24 +87,27 @@ public class InvoiceController {
         Random r = new Random();
         long number = x+((long)(r.nextDouble()*(y-x)));
         invoiceId=number;
+
         System.out.println("1");
         for (int i = 0; i <invoiceWrapper.getInvoiceArrayList().size() ; i++) {
             customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
+            invoiceWrapper.getInvoiceArrayList().get(i).setService(j.get(i));
 
             if(invoiceWrapper.getInvoiceArrayList().get(i).getPrice()==0 ||invoiceWrapper.getInvoiceArrayList().get(i).getUnit()==0){
                 invoiceWrapper.getInvoiceArrayList().remove(i);
             }
-             invoiceWrapper.getInvoiceArrayList().get(i).setService(j.get(i));
             totalprice+=invoiceWrapper.getInvoiceArrayList().get(i).getPrice();
 
 
         }
+        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
+
         System.out.println("2");
         invoiceRepository.saveAll(invoiceWrapper.getInvoiceArrayList());
         Customer customer= customerRepository.findByid(customerId);
-        System.out.println(customer);
-        System.out.println("3");
-        InvoiceCollection invoiceCollection = new InvoiceCollection(number,false,totalprice,customer.getFirmName(),customer.getEmail(),customer.getName(),invoiceWrapper.getInvoiceArrayList());
+
+        InvoiceCollection invoiceCollection = new InvoiceCollection(number,false,totalpricewithtax,customer.getFirmName(),customer.getEmail(),customer.getName(),dateFormat.format(invoiceWrapper.getInvoiceCalendar())+"",dateFormat.format(invoiceWrapper.getDueCalendar()) +"",invoiceWrapper.getInvoiceArrayList());
+        System.out.println(invoiceWrapper.getDueCalendar());
         System.out.println("4");
         invoiceCollectionRepo.save(invoiceCollection);
         return "redirect:/kvittering";
@@ -164,5 +170,58 @@ public class InvoiceController {
 
         return "redirect:/visSendteFaktura";
     }
+
+    @GetMapping("/statistik")
+     public String statistik(Model model){
+        ArrayList<Long> mothdayyear= new ArrayList<>();
+        mothdayyear.add(statistikregner(1));
+        mothdayyear.add(statistikregner(2));
+        mothdayyear.add(statistikregner(3));
+
+        for (int i = 0; i <mothdayyear.size() ; i++) {
+            System.out.println(mothdayyear.get(i));
+        }
+
+
+
+            model.addAttribute("statistics",mothdayyear);
+
+        return "statisticInvoice" ;
+
+
+
+
+
+    }
+
+public Long statistikregner(int minusmoth){
+
+    DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.MONTH, -1);
+    Calendar cal1 = Calendar.getInstance();
+
+
+    Calendar start = Calendar.getInstance();
+    start.setTime(cal.getTime());
+    Calendar end = Calendar.getInstance();
+    end.setTime(cal1.getTime());
+    Long totalprice=0L;
+    for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+
+        List<InvoiceCollection> invoiceCollectionList =invoiceCollectionRepo.findAllByInvoiceDate(dateFormat.format(date)+"");
+        if(invoiceCollectionList.size()==0){
+
+        }else
+            System.out.println("List is not empty");
+
+
+            for (int i = 0; i <invoiceCollectionList.size() ; i++) {
+                totalprice+=invoiceCollectionList.get(i).getTotalPris();
+            }
+    }
+
+    return totalprice;
+}
 
 }
