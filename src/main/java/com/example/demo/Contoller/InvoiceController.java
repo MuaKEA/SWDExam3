@@ -168,16 +168,10 @@ public class InvoiceController {
      public String statistik(Model model){
         ArrayList<Long> mothdayyear= new ArrayList<>();
         mothdayyear.add(statistikregner(1));
-        mothdayyear.add(statistikregner(2));
         mothdayyear.add(statistikregner(3));
+        mothdayyear.add(statistikregner(12));
 
-        for (int i = 0; i <mothdayyear.size() ; i++) {
-            System.out.println(mothdayyear.get(i));
-        }
-
-
-
-            model.addAttribute("statistics",mothdayyear);
+        model.addAttribute("statistics",mothdayyear);
 
         return "statisticInvoice" ;
 
