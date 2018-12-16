@@ -26,7 +26,7 @@
             <span class="row-heading align-middle">Navn</span>
         </div>
             <div class="col-sm-3">
-                <span class="border-0 row-heading" th:field="${customer.name}"></span>
+                <span class="border-0 row-heading" th:text="${invoiceList.invoices.get(1).customer.name}"></span>
             </div>
         </div>
         <div class="row border-bottom-purple row-height">
@@ -34,7 +34,7 @@
             <span class="row-heading align-middle">Firma</span>
             </div>
             <div class="col-sm-3">
-                <span class="border-0 row-heading" th:field="${customer.firmName}"></span>
+                <span class="border-0 row-heading" th:text="${invoiceList.invoices.get(1).customer.firmName}"></span>
             </div>
         </div>
         <div class="row border-bottom-purple row-height">
@@ -42,7 +42,7 @@
             <span class="row-heading align-middle">Vej</span>
             </div>
             <div class="col-sm-3">
-                <span class="border-0 row-heading" th:field="${customer.address}"></span>
+                <span class="border-0 row-heading" th:text="${invoiceList.getInvoices().get(1).customer.address}"></span>
             </div>
         </div>
         <div class="row border-bottom-purple row-height">
@@ -50,7 +50,7 @@
         <span class="row-heading align-middle">By</span>
             </div>
             <div class="col-sm-3">
-                <span class="border-0 row-heading" th:field="${customer.city}"></span>
+                <span class="border-0 row-heading" th:text="${invoiceList.invoices.get(1).customer.city}"></span>
             </div>
         </div>
         <div class="row">
@@ -58,7 +58,7 @@
         <span class="row-heading align-middle">Postnummer</span>
             </div>
             <div class="col-sm-3">
-                <span class="border-0 row-heading" th:field="${customer.postCode}"></span>
+                <span class="border-0 row-heading" th:text="${invoiceList.invoices.get(1).customer.postCode}"></span>
             </div>
         </div>
         <div class="row confirmation-row-bg row-height">

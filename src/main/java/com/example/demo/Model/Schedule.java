@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Scheme {
+public class Schedule {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
@@ -17,12 +17,13 @@ private String thursDay;
 private String friDay;
 private String saturDay;
 private String sunDay;
+private Long scheduleid;
 
-public Scheme (){
+public Schedule (){
 
 }
 
-    public Scheme(String monDay, String tuesDay, String wednesday, String thursDay, String friDay, String saturDay, String sunDay) {
+    public Schedule(String monDay, String tuesDay, String wednesday, String thursDay, String friDay, String saturDay, String sunDay,Long scheduleid) {
         this.monDay = monDay;
         this.tuesDay = tuesDay;
         this.wednesday = wednesday;
@@ -30,6 +31,15 @@ public Scheme (){
         this.friDay = friDay;
         this.saturDay = saturDay;
         this.sunDay = sunDay;
+       this.scheduleid=scheduleid;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMonDay() {
@@ -48,11 +58,11 @@ public Scheme (){
         this.tuesDay = tuesDay;
     }
 
-    public String getwednesday() {
+    public String getWednesday() {
         return wednesday;
     }
 
-    public void setwednesday(String wednesday) {
+    public void setWednesday(String wednesday) {
         this.wednesday = wednesday;
     }
 
@@ -88,11 +98,26 @@ public Scheme (){
         this.sunDay = sunDay;
     }
 
-    public long getId() {
-        return id;
+    public Long getScheduleid() {
+        return scheduleid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setScheduleid(Long scheduleid) {
+        this.scheduleid = scheduleid;
+    }
+
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "id=" + id +
+                ", monDay='" + monDay + '\'' +
+                ", tuesDay='" + tuesDay + '\'' +
+                ", wednesday='" + wednesday + '\'' +
+                ", thursDay='" + thursDay + '\'' +
+                ", friDay='" + friDay + '\'' +
+                ", saturDay='" + saturDay + '\'' +
+                ", sunDay='" + sunDay + '\'' +
+                ", scheduleid=" + scheduleid +
+                '}';
     }
 }

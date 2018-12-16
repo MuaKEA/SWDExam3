@@ -1,11 +1,9 @@
 package com.example.demo.Contoller;
 
 import com.example.demo.Model.Customer;
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Repository.CustomerRepository;
-import com.example.demo.Model.Repository.CustomerRepository;
-import com.example.demo.Model.Repository.InvoiceRepository;
-import com.example.demo.Model.Repository.ServiceRepository;
+import com.example.demo.Repository.CustomerRepository;
+import com.example.demo.Repository.InvoiceRepository;
+import com.example.demo.Repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,10 +1,11 @@
 package com.example.demo.Contoller;
 
 import com.example.demo.Model.*;
-import com.example.demo.Model.Repository.CustomerRepository;
-import com.example.demo.Model.Repository.InvoiceCollectionRepo;
-import com.example.demo.Model.Repository.InvoiceRepository;
-import com.example.demo.Model.Repository.ServiceRepository;
+
+import com.example.demo.Repository.CustomerRepository;
+import com.example.demo.Repository.InvoiceCollectionRepo;
+import com.example.demo.Repository.InvoiceRepository;
+import com.example.demo.Repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,11 +109,10 @@ public class InvoiceController {
 
     @GetMapping("/kvittering")
     public String confirmation(Model model){
-        InvoiceCollection invoices=invoiceCollectionRepo.findByInvoiceId(invoiceId);
-         Long customer=invoices.getInvoices().get(1).getCustomer().getId();
 
-        model.addAttribute("customer", customerRepository.findByid(customer));
-        model.addAttribute("invoiceList", invoices);
+
+
+        model.addAttribute("invoiceList", invoiceCollectionRepo.findByInvoiceId(invoiceId));
         return "confirmation";
     }
 
@@ -191,7 +191,7 @@ public Long statistikregner(int minusmoth){
 
     DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
     Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.MONTH, -1);
+    cal.add(Calendar.MONTH, -minusmoth);
     Calendar cal1 = Calendar.getInstance();
 
 

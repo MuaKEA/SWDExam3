@@ -1,55 +1,38 @@
 package com.example.demo.Contoller;
 
-import com.example.demo.Model.Repository.SchemeRepo;
-import com.example.demo.Model.Scheme;
+import com.example.demo.Repository.ScheduleRepo;
+import com.example.demo.Model.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SchemeController {
 
 @Autowired
-    SchemeRepo schemeRepo;
+ScheduleRepo scheduleRepo;
 
 
 
 @GetMapping("/kalender")
     public String calender(Model model){
 
-    model.addAttribute("schema",new Scheme());
-
-
-    return "schema";
+    Schedule schedule=scheduleRepo.findByScheduleid(1L);
+    model.addAttribute("schedule",schedule );
+    return "schedule";
 }
 
 @PostMapping("/kalender")
-    public String calender(Scheme scheme){
-    schemeRepo.save(scheme);
+    public String calender(Schedule schedule){
+      scheduleRepo.deleteAll();
+     schedule.setScheduleid(1L);
+      scheduleRepo.save(schedule);
 
     return "redirect:/kalender";
 }
- @GetMapping("/redigerKalender")
- public String redigerKalender(Model model, @RequestParam(value = "id") Long id){
-    model.addAttribute("schema",schemeRepo.findById(id));
 
-
-
-
-    return "editSchema";
- }
-
-@PostMapping("/redigerKalender")
-public String redigerKalender() {
-
-
-
-
-    return "redirect:/index";
-}
 
 
 

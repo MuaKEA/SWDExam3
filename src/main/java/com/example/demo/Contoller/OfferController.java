@@ -1,8 +1,7 @@
 package com.example.demo.Contoller;
 
 import com.example.demo.Model.Offer;
-import com.example.demo.Model.Repository.OfferRepository;
-import com.example.demo.Model.Service;
+import com.example.demo.Repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
