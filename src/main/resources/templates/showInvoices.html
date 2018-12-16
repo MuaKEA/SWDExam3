@@ -40,30 +40,20 @@
                     <td th:text="${invoice.totalPris}"></td>
                     <td th:text="${invoice.paid}"></td>
                     <td th:text="${invoice.invoiceId}"></td>
-
-
                     <td>
-
                         <a th:href="@{'/redigerFaktura?id='+${invoice.getInvoiceId()}}" class="btn-sm btn-primary">Rediger</a>
                         <a th:href="@{'/sletFaktura?id='+${invoice.getInvoiceId()}}"
                            onclick="return confirm('Bekræft sletning')" class="btn-sm btn-danger">Slet</a>
                         <a th:href="@{'/markereregning?id='+${invoice.getInvoiceId()}}"
                            class="btn-sm btn-success" onclick="return confirm('regning betalt?')" >betalt</a>
-
-
                     </td>
-
                 </tr>
                 </tbody>
-
-
-
-
             </table>
-
+            <div class="container div-center">
+                <a class="btn btn-success" href="/opretFaktura">Opret</a>
+            </div>
+    </div>
 </div>
-
-
-
 </body>
 </html>

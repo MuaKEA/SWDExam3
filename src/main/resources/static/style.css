@@ -209,3 +209,10 @@ table.table-list > thead > tr > th {
 .input-receipt-width{
     width: 154px;
 }
+.dropdown-heading {
+    font-size: 19px;
+    font-family: "Helvetica Neue Condensed", sans-serif;
+    font-weight: 500;
+    color: #777777;
+    padding-left: 10px;
+}
