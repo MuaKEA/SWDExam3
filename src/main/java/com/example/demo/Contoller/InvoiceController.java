@@ -132,13 +132,10 @@ public class InvoiceController {
 
     @PostMapping("/redigerFaktura")
     public String editInvoice(InvoiceCollection invoiceCollection){
-       Invoice invoice = new Invoice();
-       invoice.setCustomer(invoiceCollection.getInvoices().get(1).getCustomer());
-        for (int i = 0; i <invoiceCollection.getInvoices().size() ; i++) {
-            System.out.println(invoiceCollection.getInvoices().get(i).getService());
+        System.out.println(invoiceCollection.getInvoices().get(1));
 
-        }
-         InvoiceCollection invoiceCollection1= new InvoiceCollection();
+
+
         return "redirect:/visSendteFaktura";
     }
 

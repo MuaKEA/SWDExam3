@@ -92,10 +92,10 @@
             </thead>
             <tbody>
             <tr th:each="invoices, itemStat : *{invoices}">
-                <td th:field="${invoices.service.name}" th:value="${invoices.service.id}">
+                <td th:field="${invoice.getInvoices().get(0)}" >
                     <!-- <input type="text" th:text="${service.name}" th:value="${service.id}" readonly="readonly">-->
-                    <input class="serviceid" type="hidden" th:field="${invoices.service.getId()}">
-                    <input  type="hidden" th:field="${invoices.service.getPrice()}" >
+                    <input class="serviceid" type="hidden"th:field="*{invoices[__${itemStat.index}__].service.id}">
+                    <input  type="hidden" th:field="*{invoices[__${itemStat.index}__].service.price}" >
                 </td>
                 <td th:field="${invoices.service.price}" class="serviceprice"></td>
                 <td>
