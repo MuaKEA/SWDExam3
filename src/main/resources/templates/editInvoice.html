@@ -91,13 +91,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="invoice, itemStat : *{invoices}">
-                <td th:field="${invoice.service.name}" th:value="${invoice.service.id}">
+            <tr th:each="invoices, itemStat : *{invoices}">
+                <td th:field="${invoices.service.name}" th:value="${invoices.service.id}">
                     <!-- <input type="text" th:text="${service.name}" th:value="${service.id}" readonly="readonly">-->
-                    <input class="serviceid" type="hidden" th:field="${invoice.service.getId()}">
-                    <input  type="hidden" th:field="${invoice.service.getPrice()}" >
+                    <input class="serviceid" type="hidden" th:field="${invoices.service.getId()}">
+                    <input  type="hidden" th:field="${invoices.service.getPrice()}" >
                 </td>
-                <td th:field="${invoice.service.price}" class="serviceprice"></td>
+                <td th:field="${invoices.service.price}" class="serviceprice"></td>
                 <td>
                     <input th:field="*{invoices[__${itemStat.index}__].unit}" class="unit" type="number" min="0">
                 </td>
