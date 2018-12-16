@@ -1,92 +1,129 @@
-<!--Teacher-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
-<head lang="en">
-    <title>Edit Invoice</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>rediger regning</title>
 
-    <!--/*/ <th:block th:include="fragments/navbarHead :: head"></th:block> /*/-->
+    <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
 
 </head>
 <body>
 
 <!--/*/ <th:block th:replace="fragments/navbarBody :: navbar"></th:block> /*/-->
 
-<form class="genericForm" method="post" th:action="@{/redigerFaktura}">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container mb-3">
-            <div class="row">
-                <div class="container div-center">
-                    <h1 class="page-heading mb-3">Edit invoice</h1>
-                </div>
-            </div>
-            <div class="container input-bg input-padding">
-
-                <div class="row">
-                    <div class="col-sm-6">
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="input-heading"></p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-group mb-3 col-sm-6">
-                        <p class="input-heading">Invoice</p>
-
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"></span>
-                        </div>
-                        <input class="form-control" type="number" th:field="${invoice.unit}" required="true">
-                    </div>
-                </div>
+<!--Ydre boks-->
+<div class="jumbotron jumbotron-fluid">
+    <!--Overskrift-->
+    <div class="row">
+        <div class="container div-center">
+            <h1 class="page-heading mb-3">rediger regning</h1>
+        </div>
 
 
-                <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">Totalpris</span>
-                        <input class="form-control" type="number" th:field="${invoice.totalPrice}" required="true">
-            </div>
-                </div>
+    </div>
+    <form action="#" th:action="@{/redigerFaktura}" th:object="${invoice}" method="post">
+        <table class="table table-striped table-list">
 
-                <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">Totalpris</span>
-                        <input class="form-control" type="number" hidden th:field="${invoice.price}" required="true">
-            </div>
-                </div>
+            <input type="date"  class="form-control" id="invoiceDate"
+                   th:value="${invoice.invoiceDate}" />
+            <input type="date" class="form-control" id="duedate"
+                   th:value="${invoice.dueDate}"/>
 
-                    <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">betalt?</span>
-                <input class="form-control" type="text" th:field="${invoice.payed}" required="true">
-            </div>  <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">kunde navn</span>
-                <input class="form-control" type="text" th:field="${invoice.customer}" required="true">
-            </div>  <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">service navn:</span>
-                <input class="form-control" type="text" th:field="${invoice.service.name}" required="true">
-            </div>
-                    <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">kunde navn:</span>
-                <input class="form-control" type="text" th:field="${invoice.customer.name}" required="true">
-            </div>
-                    </div>
+        </table>
 
-                    <div class="input-group mb-3 col-sm6">
-                    <div class="input-group-prepend">
-                            <span class="input-group-text">regning nr:</span>
 
-                        <input class="form-control" type="text"  th:field="${invoice.invoiceId}" required="true">
+        <input type="hidden" th:each="service : ${Service}">
+        <div class="container input-bg input-padding">
+            <div class="container div-center">
+                <select name="customer" id="customer">
+                    <option th:each="customer:${Customer}" th:field="${customer.getFirmName()}" th:value="${customer.getId()}">
+                    </option>
+                </select>
+
             </div>
 
-                    </div>
+        </div>
+        <table class="table table-striped table-list">
+            <thead>
+            <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Pris</th>
+                <th scope="col">Antal</th>
+                <th scope="col">Calculated</th>
+                <th scope="col"></th>
 
 
-              <input type="submit" value="Indsend"/>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="invoice, itemStat : *{invoices}">
+                <td th:field="${invoice.service.name}" th:value="${invoice.service.id}">
+                    <!-- <input type="text" th:text="${service.name}" th:value="${service.id}" readonly="readonly">-->
+                    <input class="serviceid" type="hidden" th:field="${invoice.service.getId()}">
+                    <input  type="hidden" th:field="${invoice.service.getPrice()}" >
+                </td>
+                <td th:field="${invoice.service.price}" class="serviceprice"></td>
+                <td>
+                    <input th:field="*{invoices[__${itemStat.index}__].unit}" class="unit" type="number" min="0">
+                </td>
+                <td><input th:field="*{invoices[__${itemStat.index}__].price}" class="result"/></td>
+                <td>
+                    <input th:field="*{invoices[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
+                    <!--<input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}"/>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- <div class="row">
+            <div class="col-sm-3"></div>
+            <select class="choose_service">
+                <option th:each="service  :${Service}" th:text="${service.name}" th:value="${service.id}">
 
-</form>
+                    <input class="serviceid" type="hidden" th:field="${service.getId()}">
+                    <input  type="text" th:field="${service.getPrice()}" class="serviceprice">
+                </option>
+            </select>
+            <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" class="unit"/></td>
+            <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result" /></td>
+            <button class="calculate" type="button">calculate</button>
+            <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/></td>
+            <input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
+
+        </div>-->
+
+        <div class="container div-center">
+            <input class="btn btn-success" type="submit" id="submitButton" th:value="Save">
+            <input class="btn btn-danger" type="reset" id="resetButton" name="reset" th:value="Reset">
+        </div>
+    </form>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(".unit").on('input', function () {
+        var units = $(this).val();
+        var price = $(this).parent().parent().find(".serviceprice").text();
+        var result = units * price;
+        $(this).parent().parent().find(".result").val(result);
+    });
+
+    $(".customerid").val($("#customer").val());
+
+    $("#customer").change(function () {
+        var id = $(this).val();
+
+        $(".customerid").val(id);
+    });
+
+    $(".serviceid").each(function () {
+        $(this).val($(this).parent().find(".choose_service").val());
+    });
+
+    $(".choose_service").change(function () {
+        var id = $(this).val();
+
+        $(this).parent().find(".serviceid").val(id);
+    });
+</script>
 </body>
 </html>

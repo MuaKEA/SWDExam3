@@ -64,13 +64,13 @@
         <div class="row confirmation-row-bg row-height">
             <span class="input-heading font-weight-bold span-padding">Pris</span>
         </div>
-        <tr th:each="invoices:${invoiceList.invoices}">
+        <tr th:each="invoices:${invoiceList.getInvoices()}">
         <div class="row border-bottom-purple row-height">
             <div class="col-sm-3 confirmation-col-bg">
             <span class="row-heading align-middle">Service</span>
             </div>
             <div class="col-sm-3">
-                <span class="border-0 row-heading" th:text="${invoices.service.name}"></span>
+                <span class="border-0 row-heading" th:text="${invoices.service}"></span>
             </div>
             <div class="col-sm-2 confirmation-col-bg">
                 <span class="row-heading align-middle">Antal</span>
