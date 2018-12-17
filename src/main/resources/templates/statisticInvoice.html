@@ -29,7 +29,8 @@
             </thead>
             <tbody>
             <tr>
-                <td th:each="statistic:${statistics}" th:text="${statistic}">
+                <td th:each="statistic:${statistics}">
+                    <div class="col-sm-2" th:text="${statistic}"></div>
                 <span> kr.</span>
                 </td>
             </tr>
