@@ -23,13 +23,13 @@
             <tr>
                 <th scope="col">Måned</th>
                 <th scope="col">Kvatal</th>
-                <th scope="col">Årti</th>
+                <th scope="col">År</th>
 
             </tr>
             </thead>
             <tbody>
-            <tr th:each="statistic:${statistics}">
-                <td th:text="${statistic}"></td>
+            <tr>
+                <td th:each="statistic:${statistics}" th:text="${statistic}"></td>
             </tr>
             </tbody>
         </table>
