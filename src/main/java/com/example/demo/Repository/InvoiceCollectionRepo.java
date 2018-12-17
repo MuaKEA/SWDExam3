@@ -10,4 +10,6 @@ public interface InvoiceCollectionRepo extends CrudRepository<InvoiceCollection,
 InvoiceCollection findByInvoiceId(Long id);
 List<InvoiceCollection> findAll();
 List<InvoiceCollection> findAllByInvoiceDate(String date);
+InvoiceCollection deleteByInvoiceId(Long id);
+
 }

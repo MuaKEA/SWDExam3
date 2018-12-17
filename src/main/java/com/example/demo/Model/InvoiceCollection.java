@@ -18,7 +18,7 @@ public class InvoiceCollection {
     private String name;
     private String invoiceDate;
     private String dueDate;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Invoice> invoices;
 
 

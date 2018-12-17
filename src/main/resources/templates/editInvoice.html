@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>rediger regning</title>
+    <title>Services</title>
 
     <!--/*/ <th:block th:include="Fragments/navbarHead :: head"></th:block> /*/-->
 
@@ -14,13 +14,11 @@
 <div class="jumbotron jumbotron-fluid">
     <!--Overskrift-->
     <div class="row">
-        <div class="container div-center">
-            <h1 class="page-heading mb-3">rediger regning</h1>
+        <div class="container">
+            <h1 class="page-heading mb-3">Opret faktura</h1>
         </div>
-
-
     </div>
-    <form action="#" th:action="@{/redigerFaktura}" th:object="${invoice}" method="post">
+    <form action="#" th:action="@{/save}" th:object="${Invoices}" method="post">
         <input type="hidden" th:each="service : ${Service}">
         <div class="container input-bg input-padding">
             <div class="row">
@@ -46,89 +44,51 @@
                 </div>
                 <div class="col-sm-3 mb-3">
                     <input type="date"  class="form-control" id="invoiceDate"
-                           th:value="${invoice.invoiceDate}" th:name="invoiceCalendar" />
+                           th:value="${#calendars.format(Invoices.invoiceCalendar,'yyyy-MM-dd')}" th:name="invoiceCalendar" />
                 </div>
 
                 <div class="col-sm-3 mb-3">
                     <input type="date" value="2016-10-13" class="form-control" id="duedate"
-                           th:value="${invoice.dueDate}" th:name="dueCalendar" />
+                           th:value="${#calendars.format(Invoices.dueCalendar,'yyyy-MM-dd')}" th:name="dueCalendar" />
                 </div>
                 <div class="col-sm-2"></div>
             </div>
 
         </div>
-        <!--<table class="table table-striped table-list">
-
-            <input type="date"  class="form-control" id="invoiceDate"
-                   th:value="${invoice.invoiceDate}" />
-            <input type="date" class="form-control" id="duedate"
-                   th:value="${invoice.dueDate}"/>
-
-        </table>
-
-        <input type="hidden" th:each="service : ${Service}">
-        <div class="container input-bg input-padding">
-            <div class="container div-center">
-                <select name="customer" id="customer">
-                    <option th:each="customer:${Customer}" th:field="${customer.getFirmName()}" th:value="${customer.getId()}">
-                    </option>
-                </select>
-
-            </div>
-
-        </div>
-        -->
         <table class="table table-striped table-list">
             <thead>
             <tr>
                 <th scope="col">Service</th>
                 <th scope="col">Pris</th>
                 <th scope="col">Antal</th>
-                <th scope="col">Calculated</th>
+                <th scope="col">Pris</th>
                 <th scope="col"></th>
 
 
             </tr>
             </thead>
             <tbody>
-            <tr th:each="invoices, itemStat : *{invoices}">
-                <td th:field="${invoice.getInvoices().get(0)}" >
+            <tr th:each="invoice, itemStat : *{invoiceArrayList}">
+                <td th:text="${invoice.service.name}" th:value="${invoice.service.id}">
                     <!-- <input type="text" th:text="${service.name}" th:value="${service.id}" readonly="readonly">-->
-                    <input class="serviceid" type="hidden"th:field="*{invoices[__${itemStat.index}__].service.id}">
-                    <input  type="hidden" th:field="*{invoices[__${itemStat.index}__].service.price}" >
+                    <input class="serviceid" type="hidden" th:field="${invoice.service.getId()}">
+                    <input  type="hidden" th:field="${invoice.service.getPrice()}" >
                 </td>
-                <td th:field="${invoices.service.price}" class="serviceprice"></td>
+                <td th:text="${invoice.service.price}" class="serviceprice"></td>
                 <td>
-                    <input th:field="*{invoices[__${itemStat.index}__].unit}" class="unit" type="number" min="0">
+                    <input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" class="unit" type="number" min="0">
                 </td>
-                <td><input th:field="*{invoices[__${itemStat.index}__].price}" class="result"/></td>
+                <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result"/></td>
                 <td>
-                    <input th:field="*{invoices[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
+                    <input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/>
                     <!--<input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}"/>-->
                 </td>
             </tr>
             </tbody>
         </table>
-        <!-- <div class="row">
-            <div class="col-sm-3"></div>
-            <select class="choose_service">
-                <option th:each="service  :${Service}" th:text="${service.name}" th:value="${service.id}">
-
-                    <input class="serviceid" type="hidden" th:field="${service.getId()}">
-                    <input  type="text" th:field="${service.getPrice()}" class="serviceprice">
-                </option>
-            </select>
-            <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].unit}" class="unit"/></td>
-            <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].price}" class="result" /></td>
-            <button class="calculate" type="button">calculate</button>
-            <td><input th:field="*{invoiceArrayList[__${itemStat.index}__].customer.id}" type="hidden" class="customerid"/></td>
-            <input class="serviceid" type="hidden" th:field="*{invoiceArrayList[__${itemStat.index}__].service.id}">
-
-        </div>-->
-
         <div class="container div-center">
-            <input class="btn btn-success" type="submit" id="submitButton" th:value="Save">
-            <input class="btn btn-danger" type="reset" id="resetButton" name="reset" th:value="Reset">
+            <input class="btn btn-success" type="submit" id="submitButton" th:value="Gem">
+            <input class="btn btn-danger" type="reset" id="resetButton" name="reset" th:value="Nulstil">
         </div>
     </form>
 </div>
