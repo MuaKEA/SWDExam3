@@ -148,7 +148,8 @@ public class InvoiceController {
 
     @GetMapping("/sletFaktura")
     public String deleteInvoice(@RequestParam(value = "id") Long id){
-        invoiceCollectionRepo.deleteByInvoiceId(id);
+        InvoiceCollection invoiceCollection = invoiceCollectionRepo.findByInvoiceId(id);
+        invoiceCollectionRepo.delete(invoiceCollection);
         return "redirect:/visSendteFaktura";
     }
 
@@ -198,7 +199,7 @@ public class InvoiceController {
     Long totalprice=0L;
     for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 
-        List<InvoiceCollection> invoiceCollectionList =invoiceCollectionRepo.findAllByInvoiceDate(dateFormat.format(date)+"");
+        List<InvoiceCollection> invoiceCollectionList =invoiceCollectionRepo.findAllByInvoiceDateAndPaid(dateFormat.format(date)+"",true);
         if(invoiceCollectionList.size()==0){
 
         }else

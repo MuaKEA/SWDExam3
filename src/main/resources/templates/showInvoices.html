@@ -38,7 +38,7 @@
                     <td th:text="${invoice.name}"></td>
                     <td th:text="${invoice.email}"></td>
                     <td th:text="${invoice.totalPris}"></td>
-                    <td th:text="${invoice.paid}"></td>
+                    <td th:text="${invoice.paid} ? 'Ja' : 'Nej'"></td>
                     <td th:text="${invoice.invoiceId}"></td>
                     <td>
                         <a th:href="@{'/redigerFaktura?id='+${invoice.getInvoiceId()}}" class="btn-sm btn-primary">Rediger</a>

@@ -9,7 +9,7 @@ import java.util.*;
 public class InvoiceCollection {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private long id;
+    private Long id;
     private Long invoiceId;
     private Boolean paid;
     private Long totalPris;
@@ -39,11 +39,11 @@ public class InvoiceCollection {
         this.invoices = invoices;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
