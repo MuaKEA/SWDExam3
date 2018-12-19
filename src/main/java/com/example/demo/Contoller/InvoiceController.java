@@ -22,7 +22,6 @@ public class InvoiceController {
     public Long Id;
     public Long invoiceId;
 
-
     @Autowired
     private InvoiceRepository invoiceRepository;
     @Autowired
@@ -42,7 +41,6 @@ public class InvoiceController {
 
     }
 
-
     @GetMapping("/visSendteFaktura")
     public String showInvoices(Model model) {
         model.addAttribute("invoiceList", invoiceCollectionRepo.findAll());
@@ -50,10 +48,6 @@ public class InvoiceController {
 
         return "showInvoices";
     }
-
-
-
-
 
 
     @GetMapping("/kvittering")
@@ -79,19 +73,17 @@ public class InvoiceController {
     @GetMapping("/redigerFaktura")
     public String editInvoice(@RequestParam(value = "id") Long id, Model model){
 
-    j=serviceRepository.findAll();
-    InvoiceWrapper invoiceWrapper= new InvoiceWrapper();
-    generateobjecs(invoiceWrapper);
+        j=serviceRepository.findAll();
+        InvoiceWrapper invoiceWrapper= new InvoiceWrapper();
+        generateobjecs(invoiceWrapper);
 
 
         for (int i = 0; i <invoiceCollectionRepo.findByInvoiceId(id).getInvoices().size() ; i++) {
-      invoiceWrapper.getInvoiceArrayList().get(i).setService(invoiceCollectionRepo.findByInvoiceId(id).getInvoices().get(i).getService());
-      invoiceWrapper.getInvoiceArrayList().get(i).setUnit(invoiceCollectionRepo.findByInvoiceId(id).getInvoices().get(i).getUnit());
-      invoiceWrapper.getInvoiceArrayList().get(i).setPrice(invoiceCollectionRepo.findByInvoiceId(id).getInvoices().get(i).getPrice());
+            invoiceWrapper.getInvoiceArrayList().get(i).setService(invoiceCollectionRepo.findByInvoiceId(id).getInvoices().get(i).getService());
+            invoiceWrapper.getInvoiceArrayList().get(i).setUnit(invoiceCollectionRepo.findByInvoiceId(id).getInvoices().get(i).getUnit());
+            invoiceWrapper.getInvoiceArrayList().get(i).setPrice(invoiceCollectionRepo.findByInvoiceId(id).getInvoices().get(i).getPrice());
 
         }
-
-
         model.addAttribute("Invoices", invoiceWrapper);
         model.addAttribute("Customer", customerRepository.findAll());
         return "editInvoice";
@@ -107,22 +99,10 @@ public class InvoiceController {
         }
     }
 
-    @PostMapping("/editedInvoice")
-    public String editInvoice(InvoiceCollection invoiceCollection){
-        System.out.println(invoiceCollection.getInvoices().get(1));
-
-
-
-        return "redirect:/visSendteFaktura";
-    }
-
-
     @PostMapping("/save")
     public String createInvoice(InvoiceWrapper invoiceWrapper){
         Long totalprice=0L;
         Long customerId=0L;
-
-
         for (int i = 0; i <invoiceWrapper.getInvoiceArrayList().size() ; i++) {
             customerId=invoiceWrapper.getInvoiceArrayList().get(i).getCustomer().getId();
             invoiceWrapper.getInvoiceArrayList().get(i).setService(j.get(i));
@@ -132,14 +112,11 @@ public class InvoiceController {
             }else
                 totalprice+=invoiceWrapper.getInvoiceArrayList().get(i).getPrice();
 
-
         }
         DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
         Long totalpricewithtax=(totalprice/100L*25) + totalprice ;
         invoiceRepository.saveAll(invoiceWrapper.getInvoiceArrayList());
         Customer customer= customerRepository.findByid(customerId);
-        System.out.println(totalprice);
-        System.out.println(totalpricewithtax);
         InvoiceCollection invoiceCollection = new InvoiceCollection(generateRandomLong(),false,totalpricewithtax,customer.getFirmName(),customer.getEmail(),customer.getName(),dateFormat.format(invoiceWrapper.getInvoiceCalendar())+"",dateFormat.format(invoiceWrapper.getDueCalendar()) +"",invoiceWrapper.getInvoiceArrayList());
         invoiceCollectionRepo.save(invoiceCollection);
         return "redirect:/kvittering";
@@ -153,26 +130,22 @@ public class InvoiceController {
         return "redirect:/visSendteFaktura";
     }
 
-
     @GetMapping("/all")
     public String showAll(Model model) {
         model.addAttribute("invoices", invoiceRepository.findAll());
         return "books/allBooks";
     }
-
     @GetMapping("/markereregning")
     public String markereregning(@RequestParam(value = "id") Long id){
         InvoiceCollection invoiceCollection =invoiceCollectionRepo.findByInvoiceId(id);
         invoiceCollection.setPaid(true);
-
         invoiceCollectionRepo.save(invoiceCollection);
-
 
         return "redirect:/visSendteFaktura";
     }
 
     @GetMapping("/statistik")
-     public String statistik(Model model){
+    public String statistik(Model model){
         ArrayList<Long> mothdayyear= new ArrayList<>();
         mothdayyear.add(statistikregner(1));
         mothdayyear.add(statistikregner(3));
@@ -186,40 +159,38 @@ public class InvoiceController {
 
     public Long statistikregner(int minusmoth){
 
-    DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
-    Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.MONTH, -minusmoth);
-    Calendar cal1 = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd 00:00:00 zzz yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -minusmoth);
+        Calendar cal1 = Calendar.getInstance();
 
+        Calendar start = Calendar.getInstance();
+        start.setTime(cal.getTime());
+        Calendar end = Calendar.getInstance();
+        end.setTime(cal1.getTime());
+        Long totalprice=0L;
+        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 
-    Calendar start = Calendar.getInstance();
-    start.setTime(cal.getTime());
-    Calendar end = Calendar.getInstance();
-    end.setTime(cal1.getTime());
-    Long totalprice=0L;
-    for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+            List<InvoiceCollection> invoiceCollectionList =invoiceCollectionRepo.findAllByInvoiceDateAndPaid(dateFormat.format(date)+"",true);
+            if(invoiceCollectionList.size()==0){
 
-        List<InvoiceCollection> invoiceCollectionList =invoiceCollectionRepo.findAllByInvoiceDateAndPaid(dateFormat.format(date)+"",true);
-        if(invoiceCollectionList.size()==0){
-
-        }else
-            System.out.println("List is not empty");
+            }else
 
 
             for (int i = 0; i <invoiceCollectionList.size() ; i++) {
                 totalprice+=invoiceCollectionList.get(i).getTotalPris();
             }
+        }
+
+        return totalprice;
     }
-
-    return totalprice;
-}
-public Long generateRandomLong(){
+    public Long generateRandomLong(){
         long x = 1234567L;
-    long y = 2345678L;
-    Random r = new Random();
-    long number = x+((long)(r.nextDouble()*(y-x)));
-    invoiceId=number;
+        long y = 2345678L;
+        Random r = new Random();
+        long number = x+((long)(r.nextDouble()*(y-x)));
+        invoiceId=number;
 
-    return number;
-}
+        return number;
+    }
 }

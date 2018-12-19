@@ -14,8 +14,6 @@ public class SchemeController {
 @Autowired
 ScheduleRepo scheduleRepo;
 
-
-
 @GetMapping("/kalender")
     public String calender(Model model){
 

@@ -40,16 +40,17 @@
                 <select class="form-control" name="customer" id="customer">
                     <option th:each="customer:${Customer}" th:text="${customer.getFirmName()}" th:value="${customer.getId()}">
                     </option>
+
                 </select>
             </div>
                 <div class="col-sm-3 mb-3">
                 <input type="date"  class="form-control" id="invoiceDate"
-                       th:value="${#calendars.format(Invoices.invoiceCalendar,'yyyy-MM-dd')}" th:name="invoiceCalendar" />
+                       th:value="${#calendars.format(Invoices.invoiceCalendar,'yyyy-MM-dd')}" th:name="invoiceCalendar" th:required="true" />
             </div>
 
             <div class="col-sm-3 mb-3">
                 <input type="date" value="2016-10-13" class="form-control" id="duedate"
-                       th:value="${#calendars.format(Invoices.dueCalendar,'yyyy-MM-dd')}" th:name="dueCalendar" />
+                       th:value="${#calendars.format(Invoices.dueCalendar,'yyyy-MM-dd')}" th:name="dueCalendar" th:required="true" />
             </div>
                 <div class="col-sm-2"></div>
             </div>
